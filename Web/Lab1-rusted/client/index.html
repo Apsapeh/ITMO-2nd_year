@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <title>hello-wasm example</title>
+    </head>
+        <p id="change-me">change me</p>
+        <input type="button" value="click me to change" id="button">
+        
+        <script type="module">
+            import init, { greet } from "./pkg/client.js";
+
+            init().then(() => {
+                greet("WebAssembly");
+            });
+        </script>
+    </body>
+</html>

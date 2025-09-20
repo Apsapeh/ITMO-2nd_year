@@ -16,6 +16,7 @@ mod types;
 #[wasm_bindgen(start)]
 pub async fn main() {
     console_error_panic_hook::set_once();
+    //panic!();
 
     request_and_update_table(String::from("/fcgi-bin/server.jar/getAll")).await;
 

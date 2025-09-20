@@ -8,11 +8,8 @@
         <input type="button" value="click me to change" id="button">
         
         <script type="module">
-            import init, { greet } from "./pkg/client.js";
-
-            init().then(() => {
-                greet("WebAssembly");
-            });
+            import init from "./pkg/client.js";
+            init();
         </script>
     </body>
 </html>

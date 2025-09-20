@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <title>Web Lab 1</title>
-        <link rel="stylesheet" href="main.css" />
+        <link rel="stylesheet" href="index.css" />
     </head>
 
     <body>
@@ -71,7 +71,7 @@
                 </td>
 
                 <td>
-                    <form id="main_form" method="GET" action="/fcgi-bin/server.jar">
+                    <form id="main_form">
                         <table class="form-vertical">
                             <tr>
                                 <td class="form-cell glass">
@@ -126,7 +126,6 @@
                                         name="ValueY"
                                         maxlength="6"
                                         required
-                                        pattern="[-]?[0-9]*[.]?[0-9]*"
                                         title="Введите число от -3 до 3"
                                     />
                                 </td>
@@ -181,6 +180,9 @@
             </tr>
         </table>
 
-        <script src="main.js"></script>
+        <script type="module">
+            import init from "./pkg/client.js";
+            init();
+        </script>
     </body>
 </html>

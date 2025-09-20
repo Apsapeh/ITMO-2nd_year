@@ -4,6 +4,11 @@ plugins {
     id("com.github.johnrengelman.shadow") version "7.0.0"
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
 group = "nothing.here"
 
 repositories {

@@ -16,7 +16,6 @@ mod types;
 #[wasm_bindgen(start)]
 pub async fn main() {
     console_error_panic_hook::set_once();
-    //panic!();
 
     request_and_update_table(String::from("/fcgi-bin/server.jar/getAll")).await;
 
@@ -33,7 +32,8 @@ async fn send_request(url: &str) -> Option<Vec<types::HitResponse>> {
         Ok(response) => {
             if !response.ok() {
                 let status = response.status();
-                alert(&format!("Error with status - {}", status));
+                let message = response.text().await.unwrap_or(String::from(""));
+                alert(&format!("Error [{}]: {}", status, message));
                 return None;
             };
 

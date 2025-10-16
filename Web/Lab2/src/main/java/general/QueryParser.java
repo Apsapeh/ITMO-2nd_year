@@ -8,30 +8,43 @@ import java.text.SimpleDateFormat;
 import java.util.HashMap;
 
 public class QueryParser {
-    static public HitData parse(String query) throws EBadResponse, EInternalError {
+    final private HashMap<String, String> queryMap;
+    final private long startTime;
+
+    public QueryParser(String query) throws EInternalError {
         if (query == null)
             throw new EInternalError("Query is null");
-        if (query.isEmpty())
-            throw new EBadResponse("POST request has no query");
 
-        long startTime = System.nanoTime();
+        // parse query to map
+        this.queryMap = new java.util.HashMap<>();
+        for (String param : query.split("&")) {
+            String[] pair = param.split("=", 2);
+            if (pair.length > 1)
+                queryMap.put(pair[0], pair[1]);
+            else
+                queryMap.put(pair[0], "on");
+        }
 
-        HashMap<String, String> queryMap = getQueryMap(query);
+        this.startTime = System.nanoTime();
+    }
 
-        float valueY = parseField(queryMap, "ValueY", "Y", -3, 3);
-        float valueR = parseField(queryMap, "ValueR", "R", 1, 4);
-        float valueX = parseField(queryMap, "ValueX", "X", -2, 2);
+    public HitData parseToHitData() throws EBadResponse {
+        float valueY = parseField("ValueY", "Y", -3, 3);
+        float valueR = parseField("ValueR", "R", 1, 4);
+        float valueX = parseField("ValueX", "X", -2, 2);
 
         Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String date = formatter.format(new java.util.Date());
 
+        boolean isHit = HitChecker.isHit(valueX, valueY, valueR);
+
         long endTime = System.nanoTime();
         float elapsedTimeMs = (float) (endTime - startTime) / 1000000.0f;
 
-        return new HitData(valueX, valueY, valueR, date, elapsedTimeMs);
+        return new HitData(valueX, valueY, valueR, isHit, date, elapsedTimeMs);
     }
 
-    public static float parseField(HashMap<String, String> queryMap, String fieldName, String normName, float min, float max) throws EBadResponse{
+    private float parseField(String fieldName, String normName, float min, float max) throws EBadResponse{
         float value;
         String value_str = queryMap.get(fieldName);
         try {
@@ -45,22 +58,7 @@ public class QueryParser {
         return value;
     }
 
-    static public boolean containsPointData(String query) {
-        HashMap<String, String> queryMap = getQueryMap(query);
-
+    public boolean containsPointData() {
         return queryMap.containsKey("ValueY") && queryMap.containsKey("ValueR") && queryMap.containsKey("ValueX");
-    }
-
-    static private HashMap<String, String> getQueryMap(String query) {
-        HashMap<String, String> queryMap = new java.util.HashMap<>();
-        for (String param : query.split("&")) {
-            String[] pair = param.split("=", 2);
-            if (pair.length > 1) {
-                queryMap.put(pair[0], pair[1]);
-            } else {
-                queryMap.put(pair[0], "on");
-            }
-        }
-        return queryMap;
     }
 }

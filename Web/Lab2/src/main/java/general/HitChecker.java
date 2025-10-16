@@ -1,10 +1,9 @@
 package general;
 
 public class HitChecker {
-    public static boolean isHit(HitData requestData) {
-        float r = requestData.getR();
-        float x = requestData.getX() / r;
-        float y = requestData.getY() / r;
+    public static boolean isHit(float valueX, float valueY, float valueR) {
+        float x = valueX / valueR;
+        float y = valueY / valueR;
 
         boolean inRectangle = (x >= -1 && x <= 0) && (y >= 0 && y <= 0.5);
 

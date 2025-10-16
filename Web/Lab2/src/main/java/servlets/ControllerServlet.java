@@ -22,14 +22,16 @@ public class ControllerServlet extends HttpServlet {
         String query = req.getReader().lines()
                 .collect(Collectors.joining());
 
-        req.setAttribute("query", query);
+        try {
+            QueryParser parser = new QueryParser(query);
+            req.setAttribute("queryParser", parser);
 
-        if (QueryParser.containsPointData(query)) {
-            req.getRequestDispatcher("/area-check").forward(req, resp);
-        } else {
-            req.getRequestDispatcher("index.jsp").forward(req, resp);
-        }
-
-        //req.getRequestDispatcher("/area-check").forward(req, resp);
+            if (parser.containsPointData())
+                req.getRequestDispatcher("/area-check").forward(req, resp);
+            else
+                req.getRequestDispatcher("index.jsp").forward(req, resp);
+        } catch (InternalError e) {
+            resp.sendError(500, e.getMessage());
+        }        
     }
 }

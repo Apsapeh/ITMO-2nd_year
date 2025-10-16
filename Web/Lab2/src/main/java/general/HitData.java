@@ -10,11 +10,11 @@ public class HitData {
     private final String date;
     private final float time;
 
-    public HitData(float x, float y, float r, String date, float time) {
-        X = x;
-        Y = y;
-        R = r;
-        isHit = HitChecker.isHit(this);
+    public HitData(float x, float y, float r, boolean isHit, String date, float time) {
+        this.X = x;
+        this.Y = y;
+        this.R = r;
+        this.isHit = isHit;
         this.date = date;
         this.time = time;
     }

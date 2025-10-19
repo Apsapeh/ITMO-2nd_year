@@ -1,0 +1,19 @@
+# Xmake cache
+.xmake/
+build/
+
+# MacOS Cache
+.DS_Store
+
+# Visual Studio Code
+.vscode/
+.ropeproject
+doc/
+
+compile_commands.json
+
+.cache/
+
+__pycache__
+
+gen.out

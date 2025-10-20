@@ -123,6 +123,9 @@
                     <td colspan="2" class="footer glass">
                         <div class="results-header">
                             <label class="form-label">Результаты</label>
+                            <button onclick="clearResultsTable()" class="clear-button glass">
+                            Очистить
+                            </button>
                         </div>
 
                         <table id="resultsTable" class="result-table">

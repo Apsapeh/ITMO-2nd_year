@@ -3,7 +3,8 @@ package servlets;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-import general.QueryParser;
+import general.HitRequestParser;
+import general.RequestParser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -23,15 +24,27 @@ public class ControllerServlet extends HttpServlet {
                 .collect(Collectors.joining());
 
         try {
-            QueryParser parser = new QueryParser(query);
-            req.setAttribute("queryParser", parser);
+            RequestParser requestParser = new RequestParser(query);
 
-            if (parser.containsPointData())
-                req.getRequestDispatcher("/area-check").forward(req, resp);
-            else
-                req.getRequestDispatcher("index.jsp").forward(req, resp);
+            if (requestParser.isAddCommand()) {
+                HitRequestParser hitParser = new HitRequestParser(requestParser);
+                req.setAttribute("hitParser", hitParser);
+
+                if (hitParser.containsPointData())
+                    req.getRequestDispatcher("/area-check").forward(req, resp);
+                else
+                    forwardToIndex(req, resp);
+            } else if (requestParser.isClearCommand()) {
+                req.getRequestDispatcher("/clear").forward(req, resp);
+            } else {
+                forwardToIndex(req, resp);
+            }
         } catch (InternalError e) {
             resp.sendError(500, e.getMessage());
         }        
+    }
+
+    private void forwardToIndex(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
 }

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.concurrent.LinkedBlockingDeque;
 
 import general.HitData;
-import general.QueryParser;
+import general.HitRequestParser;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -22,9 +22,9 @@ public class AreaCheckServlet extends HttpServlet {
 
         try {
             // read request data
-            Object parserObject = req.getAttribute("queryParser");
-            assert (parserObject.getClass() == QueryParser.class);
-            QueryParser parser = (QueryParser)parserObject;
+            Object parserObject = req.getAttribute("hitParser");
+            assert (parserObject.getClass() == HitRequestParser.class);
+            HitRequestParser parser = (HitRequestParser)parserObject;
 
             HitData hitData = parser.parseToHitData();
 

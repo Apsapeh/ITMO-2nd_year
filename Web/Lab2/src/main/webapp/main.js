@@ -2,6 +2,10 @@
 const GRAPH_CENTER = 150;
 const GRAPH_SCALE = 100;
 
+const COMMAND_FIELD = "__cmd_type"
+const ADD_COMMAND = "add"
+const CLEAR_COMMAND = "clear"
+
 function validateInputRange(name, inputId, min, max) {
     const input = document.getElementById(inputId);
     const value = parseFloat(input.value);
@@ -112,6 +116,17 @@ function setupInputValidators() {
     });
 }
 
+async function clearResultsTable() {
+    const formData = new FormData();
+    formData.append(COMMAND_FIELD, CLEAR_COMMAND);
+    const params = new URLSearchParams(formData);
+
+    await sendRequest(params.toString());
+
+    document.getElementById('graph-points').innerHTML = "";
+    document.getElementById('resultsBody').innerHTML = "";
+}
+
 // Инициализация при загрузке
 document.addEventListener("DOMContentLoaded", function () {
     setupInputValidators();
@@ -154,6 +169,7 @@ document.getElementById("main_form").addEventListener("submit", async function (
     if (!validateForm()) return;
 
     const formData = new FormData(this);
+    formData.append(COMMAND_FIELD, ADD_COMMAND);
     const params = new URLSearchParams(formData);
 
     let data = await sendRequest(params.toString());
@@ -164,21 +180,17 @@ document.getElementById("main_form").addEventListener("submit", async function (
 
 // Клик по графику
 document.getElementById("graph").addEventListener("click", async function (event) {
-    const valueR = document.getElementById("ValueR").value;
-    if (valueR < 1 || valueR > 4) {
-        alert("Значение R должно быть от 1 до 4");
-        return;
-    }
-
+    const r = 1;
     const x = event.offsetX;
     const y = event.offsetY;
-    const normX = (x - GRAPH_CENTER) / GRAPH_SCALE * valueR;
-    const normY = (GRAPH_CENTER - y) / GRAPH_SCALE * valueR;
+    const normX = (x - GRAPH_CENTER) / GRAPH_SCALE;
+    const normY = (GRAPH_CENTER - y) / GRAPH_SCALE;
 
     const formData = new FormData();
-    formData.append("ValueR", valueR);
+    formData.append("ValueR", r);
     formData.append("ValueX", normX);
     formData.append("ValueY", normY);
+    formData.append(COMMAND_FIELD, ADD_COMMAND);
     const params = new URLSearchParams(formData);
 
     let data = await sendRequest(params.toString());

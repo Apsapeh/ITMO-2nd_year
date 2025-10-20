@@ -5,33 +5,24 @@ import exceptions.EInternalError;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
 
-public class QueryParser {
-    final private HashMap<String, String> queryMap;
+public class HitRequestParser {
+    final private RequestParser reqParser;
     final private long startTime;
 
-    public QueryParser(String query) throws EInternalError {
-        if (query == null)
-            throw new EInternalError("Query is null");
+    private static final String VALUE_X_FIELD = "ValueX";
+    private static final String VALUE_Y_FIELD = "ValueY";
+    private static final String VALUE_R_FIELD = "ValueR";
 
-        // parse query to map
-        this.queryMap = new java.util.HashMap<>();
-        for (String param : query.split("&")) {
-            String[] pair = param.split("=", 2);
-            if (pair.length > 1)
-                queryMap.put(pair[0], pair[1]);
-            else
-                queryMap.put(pair[0], "on");
-        }
-
+    public HitRequestParser(RequestParser req) throws EInternalError {
+        this.reqParser = req;
         this.startTime = System.nanoTime();
     }
 
     public HitData parseToHitData() throws EBadResponse {
-        float valueY = parseField("ValueY", "Y", -3, 3);
-        float valueR = parseField("ValueR", "R", 1, 4);
-        float valueX = parseField("ValueX", "X", -2, 2);
+        float valueY = parseField(VALUE_Y_FIELD, "Y", -3, 3);
+        float valueR = parseField(VALUE_R_FIELD, "R", 1, 4);
+        float valueX = parseField(VALUE_X_FIELD, "X", -2, 2);
 
         Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String date = formatter.format(new java.util.Date());
@@ -46,7 +37,7 @@ public class QueryParser {
 
     private float parseField(String fieldName, String normName, float min, float max) throws EBadResponse{
         float value;
-        String value_str = queryMap.get(fieldName);
+        String value_str = reqParser.get(fieldName);
         try {
             value = Float.parseFloat(value_str);
         } catch (NumberFormatException | NullPointerException e) {
@@ -59,6 +50,6 @@ public class QueryParser {
     }
 
     public boolean containsPointData() {
-        return queryMap.containsKey("ValueY") && queryMap.containsKey("ValueR") && queryMap.containsKey("ValueX");
+        return reqParser.containsKey(VALUE_Y_FIELD) && reqParser.containsKey(VALUE_R_FIELD) && reqParser.containsKey(VALUE_X_FIELD);
     }
 }

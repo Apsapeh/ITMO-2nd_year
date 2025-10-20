@@ -1,0 +1,11 @@
+[
+{
+  "directory": "/Users/ghost/Desktop/Itmo/2nd_year/PL/2st",
+  "arguments": ["/Library/Developer/CommandLineTools/usr/bin/clang", "-c", "-Qunused-arguments", "-isysroot", "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk", "-fvisibility=hidden", "-O3", "-std=c99", "-DNDEBUG", "-o", "build/.objs/1st/macosx/arm64/release/src/main.c.o", "src/main.c"],
+  "file": "src/main.c"
+},
+{
+  "directory": "/Users/ghost/Desktop/Itmo/2nd_year/PL/2st",
+  "arguments": ["/Library/Developer/CommandLineTools/usr/bin/clang", "-c", "-Qunused-arguments", "-isysroot", "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk", "-fvisibility=hidden", "-O3", "-std=c99", "-DNDEBUG", "-o", "build/.objs/1st/macosx/arm64/release/src/shape.c.o", "src/shape.c"],
+  "file": "src/shape.c"
+}]

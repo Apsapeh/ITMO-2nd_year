@@ -19,7 +19,11 @@ double input_centerY = CENTER_Y_DEFAULT;
 double input_zoom = ZOOM_DEFAULT;
 unsigned int input_maxIterations = MAX_ITERATIONS_DEFAULT;
 
-unsigned char input_isFloatShader = 0;
+#if defined(__APPLE__)
+    unsigned char input_isFloatShader = 1;
+#else
+    unsigned char input_isFloatShader = 0;
+#endif
 
 // Глобальные переменные для фреймбуффера
 int input_resolutionX;

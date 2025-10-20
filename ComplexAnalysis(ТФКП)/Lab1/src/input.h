@@ -8,6 +8,8 @@ extern double input_centerY;
 extern double input_zoom;
 extern unsigned int input_maxIterations;
 
+extern unsigned char input_isFloatShader;
+
 // Глобальные переменные для фреймбуффера
 extern int input_resolutionX;
 extern int input_resolutionY;

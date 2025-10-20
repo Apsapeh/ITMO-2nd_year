@@ -19,6 +19,8 @@ double input_centerY = CENTER_Y_DEFAULT;
 double input_zoom = ZOOM_DEFAULT;
 unsigned int input_maxIterations = MAX_ITERATIONS_DEFAULT;
 
+unsigned char input_isFloatShader = 0;
+
 // Глобальные переменные для фреймбуффера
 int input_resolutionX;
 int input_resolutionY;
@@ -141,17 +143,20 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
             input_maxIterations = (input_maxIterations > 50) ? input_maxIterations - 50 : 50;
             printf("Max iterations: %u\n", input_maxIterations);
         }
-        /*if (key == GLFW_KEY_R) {
-            input_centerX = -0.5;
-            input_centerY = 0.0;
-            input_zoom = 1.0;
-            input_maxIterations = 100;
-            printf("Reset view\n");
-        }*/
+        if (key == GLFW_KEY_R) {
+            wishZoom = ZOOM_DEFAULT;
+        }
+        if (key == GLFW_KEY_S) {
+            input_isFloatShader = 1;
+        } else if (key == GLFW_KEY_D) {
+            input_isFloatShader = 0;
+        }
+        
         if (key == GLFW_KEY_ESCAPE) {
             glfwSetWindowShouldClose(window, GLFW_TRUE);
         }
     }
+    
 }
 
 // Callback для изменения фреймбуффера

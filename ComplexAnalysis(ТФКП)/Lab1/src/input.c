@@ -9,9 +9,9 @@
 #define MAX_ITERATIONS_DEFAULT 100
 
 #define ZOOM_SPEED 5.0
-#define ZOOM_THRESHOLD 0.00001
+#define ZOOM_THRESHOLD 0.0001
 #define CENTER_SPEED 5.0
-#define CENTER_THRESHOLD 0.0000001
+#define CENTER_THRESHOLD 0.000000001
 
 // Глобальные переменные для управления камерой
 double input_centerX = CENTER_X_DEFAULT;
@@ -19,11 +19,8 @@ double input_centerY = CENTER_Y_DEFAULT;
 double input_zoom = ZOOM_DEFAULT;
 unsigned int input_maxIterations = MAX_ITERATIONS_DEFAULT;
 
-#if defined(__APPLE__)
-    unsigned char input_isFloatShader = 1;
-#else
-    unsigned char input_isFloatShader = 0;
-#endif
+int input_isFloatShader = 1;
+unsigned char input_isMenuShow = 1;
 
 // Глобальные переменные для фреймбуффера
 int input_resolutionX;
@@ -89,7 +86,7 @@ void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
     // Норализуем координаты до [-1..1], как в шейдере
     zoomTargetNormX = (2.0 * mouseX / width) - 1.0;
     zoomTargetNormY = 1.0 - (2.0 * mouseY / height);
-    
+
     double zoomByAxisX = input_zoom;
     double zoomByAxisY = input_zoom * input_aspectRatio;
 
@@ -155,9 +152,15 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         } else if (key == GLFW_KEY_D) {
             input_isFloatShader = 0;
         }
-        
+
         if (key == GLFW_KEY_ESCAPE) {
             glfwSetWindowShouldClose(window, GLFW_TRUE);
+        }
+    }
+    
+    if (action == GLFW_PRESS) {
+        if (key == GLFW_KEY_M) {
+            input_isMenuShow = !input_isMenuShow;
         }
     }
     

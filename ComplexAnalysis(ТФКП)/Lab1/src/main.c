@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>
 
 #include "render.h"
+#include "render_ui.h"
 #include "input.h"
 
 #define WIDTH 1920
@@ -26,7 +27,9 @@ int main(void) {
     }
 
     // Инициализация переменных фреймбуффера. Костыль по большей части
-    framebuffer_resize_callback(NULL, WIDTH, HEIGHT);
+    int width, height;
+    glfwGetWindowSize(window, &width, &height);
+    framebuffer_resize_callback(NULL, width, height);
 
     glfwMakeContextCurrent(window);
     glfwSetScrollCallback(window, scroll_callback);
@@ -35,11 +38,13 @@ int main(void) {
     glfwSetKeyCallback(window, key_callback);
     glfwSetFramebufferSizeCallback(window, framebuffer_resize_callback);
 
-    glfwSwapInterval(0);
+    //glfwSwapInterval(0);
 
     if (renderInit()) {
         return 1;
     }
+
+    initNuklearUI();
 
     // Основной цикл рендеринга
     double prev_time = glfwGetTime();
@@ -52,6 +57,9 @@ int main(void) {
 
         inputInterpolate(delta);
         renderDraw();
+
+        if (input_isMenuShow)
+            drawNuklearUI(window, delta);
 
         glfwSwapBuffers(window);
     }

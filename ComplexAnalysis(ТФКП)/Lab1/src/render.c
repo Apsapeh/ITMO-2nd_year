@@ -18,8 +18,6 @@ const char fragmentShaderFloatSource[] = {
 #include <fragment_float.fs.h>
 };
 
-// Компиляция шейдера
-static unsigned int compileShader(unsigned int type, const char* source);
 
 static unsigned int VAO, VBO, EBO;
 
@@ -33,6 +31,7 @@ static unsigned int u_Center;
 static unsigned int u_ZoomByAxis;
 static unsigned int u_MaxIterations;
 
+
 int renderInit(void) {
     // Инициализация GLAD
     if (!gladLoadGL(glfwGetProcAddress)) {
@@ -43,14 +42,14 @@ int renderInit(void) {
     // Создание шейдерной программы
     unsigned int vertexShader = compileShader(GL_VERTEX_SHADER, vertexShaderSource);
     unsigned int fragmentShader;
-   
+
     fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragmentShaderSource);
     shaderProgramMandelbrot = glCreateProgram();
     glAttachShader(shaderProgramMandelbrot, vertexShader);
     glAttachShader(shaderProgramMandelbrot, fragmentShader);
     glLinkProgram(shaderProgramMandelbrot);
     glDeleteShader(fragmentShader);
-    
+
     fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragmentShaderFloatSource);
     shaderProgramMandelbrotFloat = glCreateProgram();
     glAttachShader(shaderProgramMandelbrotFloat, vertexShader);
@@ -85,10 +84,12 @@ int renderInit(void) {
     u_Center = glGetUniformLocation(shaderProgramMandelbrot, "u_Center");
     u_ZoomByAxis = glGetUniformLocation(shaderProgramMandelbrot, "u_ZoomByAxis");
     u_MaxIterations = glGetUniformLocation(shaderProgramMandelbrot, "u_MaxIterations");
-    
+
     u_CenterFloat = glGetUniformLocation(shaderProgramMandelbrotFloat, "u_Center");
     u_ZoomByAxisFloat = glGetUniformLocation(shaderProgramMandelbrotFloat, "u_ZoomByAxis");
     u_MaxIterationsFloat = glGetUniformLocation(shaderProgramMandelbrotFloat, "u_MaxIterations");
+
+
     return 0;
 }
 
@@ -107,8 +108,8 @@ void renderDraw(void) {
 
     if (input_isFloatShader) {
         glUseProgram(shaderProgramMandelbrotFloat);
-        glUniform2f(u_CenterFloat, (float)input_centerX, (float)input_centerY);
-        glUniform2f(u_ZoomByAxisFloat, (float)input_zoom, (float)(input_zoom * input_aspectRatio));
+        glUniform2f(u_CenterFloat, (float) input_centerX, (float) input_centerY);
+        glUniform2f(u_ZoomByAxisFloat, (float) input_zoom, (float) (input_zoom * input_aspectRatio));
         glUniform1ui(u_MaxIterationsFloat, input_maxIterations);
     } else {
         glUseProgram(shaderProgramMandelbrot);
@@ -116,13 +117,16 @@ void renderDraw(void) {
         glUniform2d(u_ZoomByAxis, input_zoom, input_zoom * input_aspectRatio);
         glUniform1ui(u_MaxIterations, input_maxIterations);
     }
-    
+
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, NULL);
+
+    glBindVertexArray(0);
+    glUseProgram(0);
 }
 
 
-static unsigned int compileShader(unsigned int type, const char* source) {
+unsigned int compileShader(unsigned int type, const char* source) {
     GLuint shader = glCreateShader(type);
     glShaderSource(shader, 1, &source, NULL);
     glCompileShader(shader);

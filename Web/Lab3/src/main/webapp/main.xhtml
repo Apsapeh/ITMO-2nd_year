@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Лабораторная работа 3 - Основная страница</title>
+        <meta charset="UTF-8"/>
+        <h:outputStylesheet library="css" name="index.css"/>
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&amp;display=swap" rel="stylesheet"/>
+    </h:head>
+    <h:body>
+        <header id="main-header" class="glass header-style">
+            <h1>Тимофей Тарасович Кириченко, P3231, Вариант 3414</h1>
+        </header>
+
+        <table class="layout glass">
+            <tr>
+                <td class="graph-sidebar">
+                    <div class="glass" style="padding: 20px; position: relative;">
+                        <svg id="graph" height="300" width="300" xmlns="http://www.w3.org/2000/svg" style="cursor: pointer;">
+                            <!-- Оси со стрелками -->
+                            <line class="axis-line" x1="0" x2="300" y1="150" y2="150"/>
+                            <line class="axis-line" x1="150" x2="150" y1="0" y2="300"/>
+                            <polygon class="axis-arrow" points="150,0 144,15 156,15"/>
+                            <polygon class="axis-arrow" points="300,150 285,156 285,144"/>
+
+                            <!-- Засечки -->
+                            <line class="axis-tick" x1="200" x2="200" y1="155" y2="145"/>
+                            <line class="axis-tick" x1="250" x2="250" y1="155" y2="145"/>
+                            <line class="axis-tick" x1="50" x2="50" y1="155" y2="145"/>
+                            <line class="axis-tick" x1="100" x2="100" y1="155" y2="145"/>
+                            <line class="axis-tick" x1="145" x2="155" y1="100" y2="100"/>
+                            <line class="axis-tick" x1="145" x2="155" y1="50" y2="50"/>
+                            <line class="axis-tick" x1="145" x2="155" y1="200" y2="200"/>
+                            <line class="axis-tick" x1="145" x2="155" y1="250" y2="250"/>
+
+                            <!-- Подписи -->
+                            <text class="axis-label" x="195" y="140">R/2</text>
+                            <text class="axis-label" x="248" y="140">R</text>
+                            <text class="axis-label" x="40" y="140">-R</text>
+                            <text class="axis-label" x="90" y="140">-R/2</text>
+                            <text class="axis-label" x="160" y="105">R/2</text>
+                            <text class="axis-label" x="160" y="55">R</text>
+                            <text class="axis-label" x="160" y="205">-R/2</text>
+                            <text class="axis-label" x="160" y="255">-R</text>
+                            <text class="axis-title" x="160" y="20">Y</text>
+                            <text class="axis-title" x="280" y="140">X</text>
+
+                            <!-- Фигуры -->
+                            <rect class="shape-rectangle" x="50" y="100" width="100" height="50"/>
+                            <polygon class="shape-triangle" points="150,100 150,150 200,150"/>
+                            <path class="shape-semicircle" d="M 200 150 A 50 50, 0, 0, 1, 150, 200 L 150 150 Z"/>
+
+                            <!-- Центр -->
+                            <circle class="center-point" cx="150" cy="150" r="3"/>
+
+                            <g id="graph-points">
+                                <!-- Точки будут добавлены динамически -->
+                            </g>
+                        </svg>
+                    </div>
+                </td>
+
+                <td style="vertical-align: top;">
+                    <h:form id="mainForm">
+                        <table class="form-vertical">
+                            <tr>
+                                <td class="form-cell glass">
+                                    <h:outputLabel value="X" styleClass="form-label"/>
+                                    <h:outputText id="selected-value-text" 
+                                                  value="Выбранное значение: #{pointBean.x != null ? pointBean.x : '0'}" 
+                                                  styleClass="selected-value-text"/>
+                                    <div class="checkbox-container">
+                                        <input type="button" value="-3" class="x-button glass" onclick="setXValue(-3)"/>
+                                        <input type="button" value="-2" class="x-button glass" onclick="setXValue(-2)"/>
+                                        <input type="button" value="-1" class="x-button glass" onclick="setXValue(-1)"/>
+                                        <input type="button" value="0" class="x-button glass" onclick="setXValue(0)"/>
+                                        <input type="button" value="1" class="x-button glass" onclick="setXValue(1)"/>
+                                        <input type="button" value="2" class="x-button glass" onclick="setXValue(2)"/>
+                                        <input type="button" value="3" class="x-button glass" onclick="setXValue(3)"/>
+                                        <input type="button" value="4" class="x-button glass" onclick="setXValue(4)"/>
+                                        <input type="button" value="5" class="x-button glass" onclick="setXValue(5)"/>
+                                    </div>
+                                    <h:inputHidden id="valueX" value="#{pointBean.x}" converter="jakarta.faces.Float"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form-cell glass">
+                                    <h:outputLabel value="Y" for="valueY" styleClass="form-label"/>
+                                    <h:inputText id="valueY" value="#{pointBean.y}" 
+                                                 styleClass="input-text glass" 
+                                                 maxlength="6" 
+                                                 placeholder="Введите число от -5 до 5"
+                                                 converter="jakarta.faces.Float">
+                                        <f:validateDoubleRange minimum="-5" maximum="5"/>
+                                    </h:inputText>
+                                    <h:message for="valueY" styleClass="error-message"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form-cell glass">
+                                    <h:outputLabel value="R" for="valueR" styleClass="form-label"/>
+                                    <h:selectOneRadio id="valueR" value="#{pointBean.r}" layout="pageDirection" converter="jakarta.faces.Float">
+                                        <f:selectItem itemValue="1.0" itemLabel="1"/>
+                                        <f:selectItem itemValue="2.0" itemLabel="2"/>
+                                        <f:selectItem itemValue="3.0" itemLabel="3"/>
+                                        <f:selectItem itemValue="4.0" itemLabel="4"/>
+                                        <f:selectItem itemValue="5.0" itemLabel="5"/>
+                                        <f:ajax event="change" render="@none" 
+                                                onevent="(data) => { if(data.status === 'success') { renderPointsFromTable(); } }"/>
+                                    </h:selectOneRadio>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="form-cell">
+                                    <h:commandButton id="submitBtn" value="Отправить" action="#{pointBean.checkPoint}" 
+                                                     styleClass="input-button glass">
+                                        <f:ajax execute="@form" render="selected-value-text resultsTable" 
+                                                onevent="(data) => { if(data.status === 'success') { setTimeout(renderPointsFromTable, 100); } }"/>
+                                    </h:commandButton>
+                                </td>
+                            </tr>
+                        </table>
+                    </h:form>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" class="footer glass">
+                    <div class="results-header">
+                        <h:outputLabel value="Результаты" styleClass="form-label"/>
+                        <h:form id="clearForm">
+                            <h:commandButton value="Очистить" action="#{resultsBean.clearResults}" styleClass="clear-button glass">
+                                <f:ajax render="resultsTable" 
+                                        onevent="(data) => { if(data.status === 'success') { clearGraphPoints(); } }"/>
+                            </h:commandButton>
+                        </h:form>
+                    </div>
+
+                    <h:dataTable id="resultsTable" value="#{resultsBean.results}" var="result" 
+                                 styleClass="result-table">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="X"/>
+                            </f:facet>
+                            <h:outputText value="#{result.x}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Y"/>
+                            </f:facet>
+                            <h:outputText value="#{result.y}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="R"/>
+                            </f:facet>
+                            <h:outputText value="#{result.r}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Результат"/>
+                            </f:facet>
+                            <h:outputText value="#{result.isHit ? 'Попадание' : 'Промах'}" 
+                                         styleClass="#{result.isHit ? 'hit' : 'miss'}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Дата"/>
+                            </f:facet>
+                            <h:outputText value="#{result.dateTime}">
+                                <f:convertDateTime pattern="yyyy-MM-dd HH:mm:ss"/>
+                            </h:outputText>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Время исп."/>
+                            </f:facet>
+                            <h:outputText value="#{result.executionTime}">
+                                <f:convertNumber pattern="0.00000" type="number" maxFractionDigits="5"/>
+                            </h:outputText>
+                            <h:outputText value=" ms"/>
+                        </h:column>
+                    </h:dataTable>
+                    
+                    <h:form>
+                        <h:commandLink value="Вернуться на стартовую страницу" action="start" styleClass="back_link"/>
+                    </h:form>
+                </td>
+            </tr>
+        </table>
+
+        <script>
+            const GRAPH_CENTER = 150;
+            const GRAPH_SCALE = 100;
+
+            function setXValue(value) {
+                const xInput = document.getElementById('mainForm:valueX');
+                if (xInput) {
+                    xInput.value = value;
+                    updateSelectedValue(value);
+                }
+            }
+
+            function updateSelectedValue(value) {
+                const selectedText = document.getElementById('mainForm:selected-value-text');
+                if (selectedText) {
+                    selectedText.textContent = 'Выбранное значение: ' + value;
+                }
+            }
+
+            // Клик по графику
+            document.getElementById('graph').addEventListener('click', function(event) {
+                const rRadio = document.querySelector('input[name="mainForm:valueR"]:checked');
+                if (!rRadio) {
+                    alert('Пожалуйста, выберите значение R');
+                    return;
+                }
+                
+                const rect = this.getBoundingClientRect();
+                const clickX = event.clientX - rect.left;
+                const clickY = event.clientY - rect.top;
+                
+                const rValue = parseFloat(rRadio.value);
+                const x = (clickX - GRAPH_CENTER) / GRAPH_SCALE * rValue;
+                const y = (GRAPH_CENTER - clickY) / GRAPH_SCALE * rValue;
+                
+                document.getElementById('mainForm:valueX').value = x;
+                document.getElementById('mainForm:valueY').value = y;
+                updateSelectedValue(x.toFixed(2));
+                
+                setTimeout(function() {
+                    document.getElementById('mainForm:submitBtn').click();
+                }, 50);
+            });
+
+            function renderPointsFromTable() {
+                const graphPoints = document.getElementById('graph-points');
+                if (!graphPoints) return;
+
+                graphPoints.innerHTML = '';
+                
+                const rRadio = document.querySelector('input[name="mainForm:valueR"]:checked');
+                if (!rRadio) return;
+                
+                const currentR = parseFloat(rRadio.value);
+                
+                const table = document.querySelector('.result-table tbody');
+                if (!table) return;
+                
+                const rows = table.querySelectorAll('tr');
+                rows.forEach(function(row) {
+                    const cells = row.querySelectorAll('td');
+                    if (cells.length >= 4) {
+                        const x = parseFloat(cells[0].textContent.trim());
+                        const y = parseFloat(cells[1].textContent.trim());
+                        const r = parseFloat(cells[2].textContent.trim());
+                        const isHit = cells[3].textContent.trim() === 'Попадание';
+                        
+                        // Рисуем точку только если R совпадает с текущим выбранным
+                        if (r === currentR) {
+                            addPointToGraph(x, y, r, isHit);
+                        }
+                    }
+                });
+            }
+
+            function addPointToGraph(x, y, r, isHit) {
+                const graphPoints = document.getElementById('graph-points');
+                if (!graphPoints) return;
+                
+                // Нормализуем координаты
+                const scale = GRAPH_SCALE / r;
+                const svgX = GRAPH_CENTER + (x * scale);
+                const svgY = GRAPH_CENTER - (y * scale);
+                
+                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                circle.setAttribute("cx", svgX);
+                circle.setAttribute("cy", svgY);
+                circle.setAttribute("r", "4");
+                circle.setAttribute("class", isHit ? "hit-point" : "miss-point");
+                
+                graphPoints.appendChild(circle);
+            }
+
+            function clearGraphPoints() {
+                const graphPoints = document.getElementById('graph-points');
+                if (graphPoints) {
+                    graphPoints.innerHTML = '';
+                }
+            }
+
+            // Инициализация при загрузке страницы
+            document.addEventListener('DOMContentLoaded', renderPointsFromTable);
+
+            // Обновление точек при изменении R
+            document.querySelectorAll('input[name="mainForm:valueR"]').forEach(function(radio) {
+                radio.addEventListener('change', renderPointsFromTable);
+            });
+        </script>
+    </h:body>
+</html>

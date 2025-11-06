@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>Лабораторная работа 3 - Стартовая страница</title>
+        <meta charset="UTF-8"/>
+        <h:outputStylesheet library="css" name="index.css"/>
+    </h:head>
+    <h:body>
+        <header id="main-header" class="glass header-style">
+            <h1>Тимофей Тарасович Кириченко, P3231, Вариант 3414</h1>
+        </header>
+        
+        <div class="start-page-container glass">
+            <div class="clock-container">
+                <h2>Текущая дата и время:</h2>
+                <h:form id="clockForm">
+                    <h:panelGroup id="currentTime" styleClass="clock-display">
+                        <h:outputText value="#{startPageBean.currentDateTime}"/>
+                    </h:panelGroup>
+                    
+                    <h:commandScript name="updateClock" render="currentTime"/>
+                </h:form>
+            </div>
+            
+            <div class="start-page-link">
+                <h:form>
+                    <h:commandLink value="Перейти к основной странице" action="main" styleClass="nav-link"/>
+                </h:form>
+            </div>
+        </div>
+        
+        <script>
+            // Обновление часов каждые 9 секунд
+            setInterval(function() {
+                updateClock();
+            }, 9000);
+        </script>
+    </h:body>
+</html>

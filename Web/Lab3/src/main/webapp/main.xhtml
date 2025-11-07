@@ -71,17 +71,43 @@
                                                   value="Выбранное значение: #{pointBean.x != null ? pointBean.x : '0'}" 
                                                   styleClass="selected-value-text"/>
                                     <div class="checkbox-container">
-                                        <input type="button" value="-3" class="x-button glass" onclick="setXValue(-3)"/>
-                                        <input type="button" value="-2" class="x-button glass" onclick="setXValue(-2)"/>
-                                        <input type="button" value="-1" class="x-button glass" onclick="setXValue(-1)"/>
-                                        <input type="button" value="0" class="x-button glass" onclick="setXValue(0)"/>
-                                        <input type="button" value="1" class="x-button glass" onclick="setXValue(1)"/>
-                                        <input type="button" value="2" class="x-button glass" onclick="setXValue(2)"/>
-                                        <input type="button" value="3" class="x-button glass" onclick="setXValue(3)"/>
-                                        <input type="button" value="4" class="x-button glass" onclick="setXValue(4)"/>
-                                        <input type="button" value="5" class="x-button glass" onclick="setXValue(5)"/>
+                                        <h:commandButton value="-3" styleClass="x-button glass">
+                                            <f:setPropertyActionListener target="#{pointBean.x}" value="-3"/>
+                                            <f:ajax render="selected-value-text valueX"/>
+                                        </h:commandButton>
+                                        <h:commandButton value="-2" styleClass="x-button glass">
+                                            <f:setPropertyActionListener target="#{pointBean.x}" value="-2"/>
+                                            <f:ajax render="selected-value-text valueX"/>
+                                        </h:commandButton>
+                                        <h:commandButton value="-1" styleClass="x-button glass">
+                                            <f:setPropertyActionListener target="#{pointBean.x}" value="-1"/>
+                                            <f:ajax render="selected-value-text valueX"/>
+                                        </h:commandButton>
+                                        <h:commandButton value="0" styleClass="x-button glass">
+                                            <f:setPropertyActionListener target="#{pointBean.x}" value="0"/>
+                                            <f:ajax render="selected-value-text valueX"/>
+                                        </h:commandButton>
+                                        <h:commandButton value="1" styleClass="x-button glass">
+                                            <f:setPropertyActionListener target="#{pointBean.x}" value="1"/>
+                                            <f:ajax render="selected-value-text valueX"/>
+                                        </h:commandButton>
+                                        <h:commandButton value="2" styleClass="x-button glass">
+                                            <f:setPropertyActionListener target="#{pointBean.x}" value="2"/>
+                                            <f:ajax render="selected-value-text valueX"/>
+                                        </h:commandButton>
+                                        <h:commandButton value="3" styleClass="x-button glass">
+                                            <f:setPropertyActionListener target="#{pointBean.x}" value="3"/>
+                                            <f:ajax render="selected-value-text valueX"/>
+                                        </h:commandButton>
+                                        <h:commandButton value="4" styleClass="x-button glass">
+                                            <f:setPropertyActionListener target="#{pointBean.x}" value="4"/>
+                                            <f:ajax render="selected-value-text valueX"/>
+                                        </h:commandButton>
+                                        <h:commandButton value="5" styleClass="x-button glass">
+                                            <f:setPropertyActionListener target="#{pointBean.x}" value="5"/>
+                                            <f:ajax render="selected-value-text valueX"/>
+                                        </h:commandButton>
                                     </div>
-                                    <h:inputHidden id="valueX" value="#{pointBean.x}" converter="jakarta.faces.Float"/>
                                 </td>
                             </tr>
                             <tr>
@@ -121,6 +147,7 @@
                                 </td>
                             </tr>
                         </table>
+                        <h:inputHidden id="valueX" value="#{pointBean.x}"/>
                     </h:form>
                 </td>
             </tr>
@@ -193,14 +220,6 @@
         <script>
             const GRAPH_CENTER = 150;
             const GRAPH_SCALE = 100;
-
-            function setXValue(value) {
-                const xInput = document.getElementById('mainForm:valueX');
-                if (xInput) {
-                    xInput.value = value;
-                    updateSelectedValue(value);
-                }
-            }
 
             function updateSelectedValue(value) {
                 const selectedText = document.getElementById('mainForm:selected-value-text');

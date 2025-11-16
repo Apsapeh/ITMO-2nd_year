@@ -147,7 +147,17 @@
                                 </td>
                             </tr>
                         </table>
+                        
+                        <!-- Скрытые поля и кнопка для клика по графику -->
                         <h:inputHidden id="valueX" value="#{pointBean.x}"/>
+                        <h:inputHidden id="graphClickX" binding="#{graphClickX}"/>
+                        <h:inputHidden id="graphClickY" binding="#{graphClickY}"/>
+                        <h:commandButton id="graphSubmitBtn" style="display: none;">
+                            <f:ajax listener="#{pointBean.checkPointFromGraph(graphClickX.value, graphClickY.value)}" 
+                                    execute="@form" 
+                                    render="selected-value-text resultsTable"
+                                    onevent="(data) => { if(data.status === 'success') { setTimeout(renderPointsFromTable, 100); } }"/>
+                        </h:commandButton>
                     </h:form>
                 </td>
             </tr>
@@ -244,13 +254,12 @@
                 const x = (clickX - GRAPH_CENTER) / GRAPH_SCALE * rValue;
                 const y = (GRAPH_CENTER - clickY) / GRAPH_SCALE * rValue;
                 
-                document.getElementById('mainForm:valueX').value = x;
-                document.getElementById('mainForm:valueY').value = y;
-                updateSelectedValue(x.toFixed(2));
-                
-                setTimeout(function() {
-                    document.getElementById('mainForm:submitBtn').click();
-                }, 50);
+                // Устанавливаем значения в скрытые поля
+                document.getElementById('mainForm:graphClickX').value = x;
+                document.getElementById('mainForm:graphClickY').value = y;
+
+                // Вызываем скрытую кнопку 
+                document.getElementById('mainForm:graphSubmitBtn').click();
             });
 
             function renderPointsFromTable() {

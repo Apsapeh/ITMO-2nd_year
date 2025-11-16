@@ -24,25 +24,40 @@ public class HibernateUtil {
             Configuration configuration = new Configuration();
 
             Properties settings = new Properties();
-            String dbUrl = System.getProperty("db.url", 
-                System.getenv().getOrDefault("DB_URL", "jdbc:postgresql://localhost:5432/studs"));
-            String dbUser = System.getProperty("db.user", 
-                System.getenv().getOrDefault("DB_USER", "s414219"));
-            String dbPassword = System.getProperty("db.password", 
-                System.getenv().getOrDefault("DB_PASSWORD", "password"));
-            String dbDriver = System.getProperty("db.driver", 
-                System.getenv().getOrDefault("DB_DRIVER", "org.postgresql.Driver"));
+            String dbUrl = System.getProperty(
+                "db.url", 
+                System.getenv().getOrDefault("DB_URL", "jdbc:postgresql://localhost:5432/studs")
+            );
+            
+            String dbUser = System.getProperty(
+                "db.user", 
+                System.getenv().getOrDefault("DB_USER", "s414219")
+            );
+            
+            String dbPassword = System.getProperty(
+                "db.password", 
+                System.getenv().getOrDefault("DB_PASSWORD", "password")
+            );
+            
+            String dbDriver = System.getProperty(
+                "db.driver", 
+                System.getenv().getOrDefault("DB_DRIVER", "org.postgresql.Driver")
+            );
             
             settings.put(Environment.DRIVER, dbDriver);
             settings.put(Environment.URL, dbUrl);
             settings.put(Environment.USER, dbUser);
             settings.put(Environment.PASS, dbPassword);
             settings.put(Environment.DIALECT, "org.hibernate.dialect.PostgreSQLDialect");
-            settings.put(Environment.SHOW_SQL, 
-                System.getProperty("hibernate.show_sql", System.getenv().getOrDefault("HIBERNATE_SHOW_SQL", "true")));
+            settings.put(
+                Environment.SHOW_SQL, 
+                System.getProperty("hibernate.show_sql", System.getenv().getOrDefault("HIBERNATE_SHOW_SQL", "true"))
+            );
             settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
-            settings.put(Environment.HBM2DDL_AUTO, 
-                System.getProperty("hibernate.hbm2ddl.auto", System.getenv().getOrDefault("HIBERNATE_HBM2DDL_AUTO", "update")));
+            settings.put(
+                Environment.HBM2DDL_AUTO, 
+                System.getProperty("hibernate.hbm2ddl.auto",System.getenv().getOrDefault("HIBERNATE_HBM2DDL_AUTO", "update"))
+            );
             
             System.out.println("Hibernate configuration: URL=" + dbUrl + ", User=" + dbUser);
 
@@ -50,7 +65,8 @@ public class HibernateUtil {
             configuration.addAnnotatedClass(HitResult.class);
 
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                    .applySettings(configuration.getProperties()).build();
+                    .applySettings(configuration.getProperties())
+                    .build();
 
             sessionFactory = configuration.buildSessionFactory(serviceRegistry);
             System.out.println("SessionFactory created successfully");

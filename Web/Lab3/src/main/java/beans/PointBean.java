@@ -22,7 +22,8 @@ public class PointBean implements Serializable {
     @Inject
     private ResultsBean resultsBean;
 
-    private final HitResultDB hitResultDB = new HitResultDB();
+    @Inject
+    private HitResultDB hitResultDB;
 
     public Float getX() {
         return x;

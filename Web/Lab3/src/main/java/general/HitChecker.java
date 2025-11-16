@@ -2,6 +2,10 @@ package general;
 
 public class HitChecker {
     public static boolean isHit(float valueX, float valueY, float valueR) {
+        if (valueR == 0) {
+            throw new IllegalArgumentException("R cannot be zero");
+        }
+        
         float x = valueX / valueR;
         float y = valueY / valueR;
 

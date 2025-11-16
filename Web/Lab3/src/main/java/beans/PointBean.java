@@ -15,23 +15,22 @@ public class PointBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Float x;
-    private Float y;
+    private Float x = null;
+    private Float y = null;
     private Integer r = 1;
 
     @Inject
     private ResultsBean resultsBean;
 
-    private final HitResultDB hitResultDB = new HitResultDB();
+    @Inject
+    private HitResultDB hitResultDB;
 
     public Float getX() {
         return x;
     }
 
     public void setX(Float x) {
-        if (x == null || x < -3 || x > 5) {
-            throw new IllegalArgumentException("X must be between -3 and 5");
-        }
+        
         this.x = x;
     }
 
@@ -40,9 +39,7 @@ public class PointBean implements Serializable {
     }
 
     public void setY(Float y) {
-        if (y == null || y < -5 || y > 5) {
-            throw new IllegalArgumentException("Y must be between -5 and 5");
-        }
+        
         this.y = y;
     }
 
@@ -57,11 +54,7 @@ public class PointBean implements Serializable {
         this.r = r;
     }
 
-    public void checkPoint() {
-        System.out.println(
-            "checkPoint called: x=" + x + ", y=" + y + ", r=" + r
-        );
-
+    private void checkPointImpl() {
         long startTime = System.nanoTime();
 
         boolean isHit = HitChecker.isHit(x, y, r);
@@ -86,14 +79,43 @@ public class PointBean implements Serializable {
             e.printStackTrace();
         }
 
-        if (resultsBean != null) {
-            resultsBean.refreshResults();
-        }
+        resultsBean.refreshResults();
     }
 
-    public void checkPointFromGraph(Float clickX, Float clickY) {
+    public void checkPoint() {
+        if (x == null || y == null || r == null) {
+            throw new IllegalArgumentException("X, Y and R must be set");
+        }
+
+        if (x < -3 || x > 5) {
+            throw new IllegalArgumentException("X must be between -3 and 5");
+        }
+
+        if (y < -5 || y > 5) {
+            throw new IllegalArgumentException("Y must be between -5 and 5");
+        }
+
+        checkPointImpl();
+    }
+
+    public void checkPointFromGraph(String clickXStr, String clickYStr) {
+    try {
+        Float clickX = Float.parseFloat(clickXStr);
+        Float clickY = Float.parseFloat(clickYStr);
+        
+        if (clickX == null || clickY == null) {
+            throw new IllegalArgumentException("Click coordinates must be provided");
+        }
+        
+        if (r == null || r < 1 || r > 5) {
+            throw new IllegalArgumentException("R must be set and valid (1-5) before checking from graph");
+        }
+        
         this.x = clickX;
         this.y = clickY;
-        checkPoint();
+        checkPointImpl();
+    } catch (NumberFormatException e) {
+        throw new IllegalArgumentException("Invalid coordinate format");
     }
+}
 }

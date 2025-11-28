@@ -1,0 +1,115 @@
+<div class="main-container">
+  <div class="header">
+    <h2>Проверка попадания точки в область</h2>
+    <div class="user-info">
+      <span>Пользователь: {{ username }}</span>
+      <button (click)="logout()" class="logout-btn">Выход</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="input-section">
+      <h3>Параметры точки</h3>
+      
+      <div class="input-group">
+        <label>X:</label>
+        <div class="button-group">
+          <button 
+            *ngFor="let x of xValues" 
+            (click)="selectX(x)"
+            [class.selected]="selectedX === x"
+            class="value-button">
+            {{ x }}
+          </button>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Y: (-5 ... 5)</label>
+        <input 
+          type="number" 
+          [(ngModel)]="y" 
+          (input)="validateY()"
+          min="-5" 
+          max="5" 
+          step="0.01"
+          class="y-input">
+      </div>
+
+      <div class="input-group">
+        <label>R:</label>
+        <div class="button-group">
+          <button 
+            *ngFor="let r of rValues" 
+            (click)="selectR(r)"
+            [class.selected]="selectedR === r"
+            class="value-button">
+            {{ r }}
+          </button>
+        </div>
+      </div>
+
+      <button 
+        (click)="checkHit()" 
+        [disabled]="isLoading || selectedX === null"
+        class="check-button">
+        {{ isLoading ? 'Проверка...' : 'Проверить' }}
+      </button>
+
+      <div *ngIf="warnMessage" class="warn-message">
+        {{ warnMessage }}
+      </div>
+      <div *ngIf="errorMessage" class="error-message">
+        {{ errorMessage }}
+      </div>
+    </div>
+
+    <div class="graph-section">
+      <h3>График</h3>
+      <canvas 
+        #canvas
+        (click)="onCanvasClick($event)"
+        class="graph-canvas">
+      </canvas>
+    </div>
+
+    <div class="results-section">
+      <h3>Результаты</h3>
+      <div class="table-container">
+        <table class="results-table">
+          <thead>
+            <tr>
+              <th>X</th>
+              <th>Y</th>
+              <th>R</th>
+              <th>Результат</th>
+              <th>Дата</th>
+              <th>Время (мс)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let result of results">
+              <td>{{ result.x }}</td>
+              <td>{{ result.y }}</td>
+              <td>{{ result.r }}</td>
+              <td [class.hit]="result.isHit" [class.miss]="!result.isHit">
+                {{ result.isHit ? 'Попадание' : 'Промах' }}
+              </td>
+              <td>{{ formatDate(result.dateTime) }}</td>
+              <td>{{ result.executionTime.toFixed(5) }}</td>
+            </tr>
+            <tr *ngIf="results.length === 0">
+              <td colspan="6" class="no-results">Нет результатов</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button 
+        (click)="clearResults()" 
+        [disabled]="isLoading || results.length === 0"
+        class="clear-btn">
+        {{ isClearing ? 'Очистка...' : 'Очистить результаты' }}
+      </button>
+    </div>
+  </div>
+</div>

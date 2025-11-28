@@ -1,0 +1,82 @@
+<div class="login-container">
+  <div class="header">
+    <h1>Кириченко Тимофей Тарасович</h1>
+    <p>Группа: P3231</p>
+    <p>Вариант: 4414</p>
+  </div>
+
+  <div class="auth-form">
+    <div class="tabs">
+      <button 
+        [class.active]="isLoginMode" 
+        (click)="toggleMode()"
+        class="tab-button">
+        Вход
+      </button>
+      <button 
+        [class.active]="!isLoginMode" 
+        (click)="toggleMode()"
+        class="tab-button">
+        Регистрация
+      </button>
+    </div>
+
+    <div *ngIf="isLoginMode" class="form-content">
+      <h2>Вход</h2>
+      <form (ngSubmit)="onLogin()">
+        <div class="form-group">
+          <label for="login-username">Логин:</label>
+          <input 
+            type="text" 
+            id="login-username"
+            [(ngModel)]="loginData.username" 
+            name="username"
+            required>
+        </div>
+        <div class="form-group">
+          <label for="login-password">Пароль:</label>
+          <input 
+            type="password" 
+            id="login-password"
+            [(ngModel)]="loginData.password" 
+            name="password"
+            required>
+        </div>
+        <button type="submit" [disabled]="isLoading" class="submit-button">
+          {{ isLoading ? 'Загрузка...' : 'Войти' }}
+        </button>
+      </form>
+    </div>
+
+    <div *ngIf="!isLoginMode" class="form-content">
+      <h2>Регистрация</h2>
+      <form (ngSubmit)="onRegister()">
+        <div class="form-group">
+          <label for="register-username">Логин:</label>
+          <input 
+            type="text" 
+            id="register-username"
+            [(ngModel)]="registerData.username" 
+            name="username"
+            required>
+        </div>
+        <div class="form-group">
+          <label for="register-password">Пароль:</label>
+          <input 
+            type="password" 
+            id="register-password"
+            [(ngModel)]="registerData.password" 
+            name="password"
+            required>
+        </div>
+        <button type="submit" [disabled]="isLoading" class="submit-button">
+          {{ isLoading ? 'Загрузка...' : 'Зарегистрироваться' }}
+        </button>
+      </form>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{ errorMessage }}
+    </div>
+  </div>
+</div>

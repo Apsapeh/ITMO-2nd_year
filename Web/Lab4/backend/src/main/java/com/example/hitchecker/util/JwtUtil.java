@@ -44,7 +44,7 @@ public class JwtUtil {
                 .getPayload();
     }
     
-    private Boolean isTokenExpired(String token) {
+    private boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());
     }
     
@@ -57,7 +57,7 @@ public class JwtUtil {
                 .compact();
     }
     
-    public Boolean validateToken(String token, String username) {
+    public boolean validateToken(String token, String username) {
         final String extractedUsername = extractUsername(token);
         return (extractedUsername.equals(username) && !isTokenExpired(token));
     }

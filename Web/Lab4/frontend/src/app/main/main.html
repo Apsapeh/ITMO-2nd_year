@@ -74,11 +74,38 @@
     </div>
 
     <div class="results-section">
-      <h3>Результаты</h3>
+      <h3 class="results-header">
+        Результаты
+        
+        <div class="pagination-controls">
+          <input 
+          type="number" 
+          [(ngModel)]="pageSize" 
+          (input)="onPageSizeChange()"
+          (blur)="onPageSizeChange()" min="1"
+          min="0" 
+          max="1000" 
+          step="1"
+          class="page-size-input">
+
+          <span class="results-count">{{ currentPage * pageSize + 1 }} - {{ (currentPage + 1) * pageSize }} из {{ totalResults }}</span>
+
+          <button (click)="prevPage()" class="page-btn">
+            ←
+          </button>
+
+          <button (click)="nextPage()" class="page-btn">
+            →
+          </button>
+        </div>
+        
+      </h3>
+
       <div class="table-container">
         <table class="results-table">
           <thead>
             <tr>
+              <th>Пользователь</th>
               <th>X</th>
               <th>Y</th>
               <th>R</th>
@@ -89,6 +116,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let result of results">
+              <td>{{ result.username }}</td>
               <td>{{ result.x }}</td>
               <td>{{ result.y }}</td>
               <td>{{ result.r }}</td>

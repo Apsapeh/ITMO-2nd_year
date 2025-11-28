@@ -3,14 +3,15 @@ package com.example.hitchecker.controller;
 import com.example.hitchecker.dto.HitCheckRequest;
 import com.example.hitchecker.dto.HitCheckGraphRequest;
 import com.example.hitchecker.dto.HitResultResponse;
+import com.example.hitchecker.dto.HitTableRequest;
+import com.example.hitchecker.dto.HitTableResponse;
 import com.example.hitchecker.service.HitCheckService;
 import com.example.hitchecker.util.JwtUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/hit")
@@ -56,17 +57,19 @@ public class HitController {
             return ResponseEntity.badRequest().build();
         }
     }
-    
-    @GetMapping("/results")
-    public ResponseEntity<List<HitResultResponse>> getResults(HttpServletRequest request) {
+
+    @PostMapping("/results")
+    public ResponseEntity<HitTableResponse> getResults(
+        @Valid @RequestBody HitTableRequest request, 
+        HttpServletRequest httpRequest
+    ) {
         try {
-            String username = extractUsernameFromRequest(request);
-            List<HitResultResponse> results = hitCheckService.getResults(username);
-            return ResponseEntity.ok(results);
+            HitTableResponse resultsPage = hitCheckService.getResults(request);
+            return ResponseEntity.ok(resultsPage);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().build();
         }
-    }
+}
 
     @DeleteMapping("/results/clear")
     public ResponseEntity<Void> clearResults(HttpServletRequest request) {

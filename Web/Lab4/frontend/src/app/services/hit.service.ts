@@ -1,14 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { HitCheckGraphRequest, HitCheckRequest, HitResult } from '../models/hit.model';
+import { HitCheckGraphRequest, HitCheckRequest, HitResult, HitTableRequest, HitTableResponse } from '../models/hit.model';
 import { AuthService } from './auth.service';
+import { apiBaseUrl } from '../app.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HitService {
-  private apiUrl = 'http://localhost:28080/api/hit';
+  private apiUrl =  `${apiBaseUrl}/hit`;
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
@@ -32,8 +33,8 @@ export class HitService {
     });
   }
 
-  getResults(): Observable<HitResult[]> {
-    return this.http.get<HitResult[]>(`${this.apiUrl}/results`, {
+  getResults(request: HitTableRequest): Observable<HitTableResponse> {
+    return this.http.post<HitTableResponse>(`${this.apiUrl}/results`, request, {
       headers: this.getHeaders()
     });
   }

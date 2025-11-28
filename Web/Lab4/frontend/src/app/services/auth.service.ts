@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { LoginRequest, RegisterRequest, AuthResponse } from '../models/auth.model';
 import { Router } from '@angular/router';
+import { apiBaseUrl } from '../app.config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:28080/api/auth';
+  private apiUrl = `${apiBaseUrl}/auth`;
   private tokenKey = 'authToken';
   private usernameKey = 'username';
 

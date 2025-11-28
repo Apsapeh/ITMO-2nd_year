@@ -10,6 +10,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class HitResultResponse {
+    private String username;
     private Long id;
     private Float x;
     private Float y;

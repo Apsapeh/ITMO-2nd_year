@@ -1,0 +1,269 @@
+.main-container {
+  min-height: 100vh;
+  padding: 20px;
+  background: #f5f5f5;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header h2 {
+  margin: 0;
+  color: #333;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logout-btn {
+  padding: 8px 16px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background: #c82333;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.input-section, .graph-section, .results-section {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.input-section h3, .graph-section h3, .results-section h3 {
+  margin-top: 0;
+  color: #333;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 10px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: #333;
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.value-button {
+  padding: 8px 16px;
+  border: 2px solid #ddd;
+  background: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+}
+
+.value-button:hover {
+  border-color: #667eea;
+  background: #f0f0ff;
+}
+
+.value-button.selected {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+.y-input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.y-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+.check-button {
+  width: 100%;
+  padding: 12px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
+}
+
+.check-button:hover:not(:disabled) {
+  background: #5568d3;
+}
+
+.check-button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.clear-btn {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 8px 16px;
+  background: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.graph-canvas {
+  width: 100%;
+  max-width: 400px;
+  height: 400px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  cursor: crosshair;
+}
+
+.results-section {
+  grid-column: span 1;
+}
+
+.table-container {
+  overflow-x: auto;
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.results-table th {
+  background: #667eea;
+  color: white;
+  padding: 10px;
+  text-align: left;
+  position: sticky;
+  top: 0;
+}
+
+.results-table td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+
+.results-table tr:hover {
+  background: #f5f5f5;
+}
+
+.hit {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.miss {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.no-results {
+  text-align: center;
+  color: #999;
+  padding: 20px;
+}
+
+.error-message, .warn-message {
+  margin-top: 10px;
+  padding: 10px;
+  background: #fee;
+  color: #c33;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.warn-message {
+  background: #fff4e5;
+  color: #b36b00;
+}
+
+
+/* Tablet (895px - 1053px) */
+@media (min-width: 895px) and (max-width: 1053px) {
+  .content {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .results-section {
+    grid-column: span 2;
+  }
+}
+
+/* Mobile (< 895px) */
+@media (max-width: 894px) {
+  .header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .content {
+    grid-template-columns: 1fr;
+  }
+  
+  .graph-canvas {
+    max-width: 100%;
+  }
+  
+  .results-section {
+    grid-column: span 1;
+  }
+  
+  .table-container {
+    max-height: 400px;
+  }
+  
+  .results-table {
+    font-size: 0.8rem;
+  }
+  
+  .results-table th,
+  .results-table td {
+    padding: 6px;
+  }
+}
+

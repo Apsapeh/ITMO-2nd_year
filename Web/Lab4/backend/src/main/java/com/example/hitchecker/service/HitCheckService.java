@@ -64,6 +64,13 @@ public class HitCheckService {
     }
 
     public HitResultResponse checkHitGraph(HitCheckGraphRequest request, String username) {
+        if (request.getX() < -request.getR() * 1.7 || request.getX() > request.getR() * 1.7) {
+            throw new IllegalArgumentException("X must be between -1.7R and 1.7R");
+        }
+        if (request.getY() < -request.getR() * 1.7 || request.getY() > request.getR() * 1.7) {
+            throw new IllegalArgumentException("Y must be between -1.7R and 1.7R");
+        }
+
         return _checkHit(request.getX(), request.getY(), request.getR(), username);
     }
     

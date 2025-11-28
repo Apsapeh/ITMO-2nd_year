@@ -11,6 +11,7 @@ export interface HitCheckGraphRequest {
 }
 
 export interface HitResult {
+  username: string;
   id: number;
   x: number;
   y: number;
@@ -20,3 +21,15 @@ export interface HitResult {
   executionTime: number;
 }
 
+
+export interface HitTableRequest {
+  page: number;
+  pageSize: number;
+}
+
+export interface HitTableResponse {
+  results: HitResult[];
+  totalCount: number;
+  page: number;
+  pageSize: number;
+}

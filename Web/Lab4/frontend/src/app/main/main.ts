@@ -24,6 +24,9 @@ export class MainComponent implements OnInit, AfterViewInit {
   selectedR: number = 1;
   
   results: HitResult[] = [];
+  currentPage = 0;
+  pageSize = 30;
+  totalResults = 0;
   isLoading = false;
   isClearing = false;
   errorMessage = '';
@@ -52,9 +55,11 @@ export class MainComponent implements OnInit, AfterViewInit {
   }
 
   loadResults(): void {
-    this.hitService.getResults().subscribe({
+    this.hitService.getResults({page: this.currentPage, pageSize: this.pageSize}).subscribe({
       next: (results) => {
-        this.results = results;
+        this.results = results.results;
+        this.totalResults = results.totalCount;
+
         this.drawGraph();
         this.cdRef.detectChanges();
       },
@@ -62,6 +67,41 @@ export class MainComponent implements OnInit, AfterViewInit {
         this.errorMessage = 'Ошибка загрузки результатов';
       }
     });
+  }
+
+  prevPage(): void {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.loadResults();
+    }
+  }
+
+  nextPage(): void {
+    if ((this.currentPage + 1) * this.pageSize < this.totalResults) {
+      this.currentPage++;
+      this.loadResults();
+    }
+  }
+
+  onPageSizeChange(): void {
+    let newSize = parseInt(this.pageSize as any, 10);
+    
+    if (isNaN(newSize) || newSize < 1) { 
+        newSize = 1;
+    }
+    
+    if (newSize > 1000) {
+        newSize = 1000;
+    }
+
+    console.log(this.pageSize);
+    
+    this.pageSize = newSize; 
+
+    console.log(this.pageSize);
+
+    this.currentPage = 0;
+    this.loadResults();
   }
 
   selectX(value: number): void {
@@ -153,6 +193,7 @@ export class MainComponent implements OnInit, AfterViewInit {
       r: this.selectedR
     }).subscribe({
       next: () => {
+        this.currentPage = 0;
         this.loadResults();
         this.isLoading = false;
         this.cdRef.detectChanges();
@@ -171,10 +212,9 @@ export class MainComponent implements OnInit, AfterViewInit {
 
     this.hitService.clearResults().subscribe({
       next: () => {
-        this.results = [];
-        this.drawGraph();
         this.isClearing = false;
-        this.cdRef.detectChanges();
+        this.currentPage = 0;
+        this.loadResults();
       },
       error: () => {
         this.errorMessage = 'Ошибка очистки результатов';

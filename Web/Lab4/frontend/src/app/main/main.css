@@ -148,6 +148,9 @@
   transition: background 0.3s;
 }
 
+
+
+
 .graph-canvas {
   width: 400px;
   max-width: 400px;
@@ -160,6 +163,63 @@
 
 .results-section {
   grid-column: span 1;
+}
+
+.results-count {
+  font-weight: bold;
+  color: #33333398;
+  vertical-align:auto;
+  padding-right: 20px;
+}
+
+.results-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  margin: 20px 0 10px 0; /* Пример: верх, право, низ, лево */
+  padding: 0; 
+}
+
+.pagination-controls {
+  display: flex; 
+  gap: 10px; /* Добавляем небольшое расстояние между элементами контролов */
+  align-items: center;
+}
+
+.page-btn {
+  padding: 4px 8px;
+  border: 0px;
+  background: #00000000;
+  /* color: white; */
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 1.3rem;
+}
+
+.page-btn:hover {
+  border-color: #667eea;
+  background: #f0f0ff;
+}
+
+.page-btn.selected {
+  background: #667eea;
+  color: white;
+  border-color: #667eea;
+}
+
+.page-size-input {
+  width: 100px;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.page-size-input:focus {
+  outline: none;
+  border-color: #667eea;
 }
 
 .table-container {

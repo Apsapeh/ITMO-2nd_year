@@ -3,10 +3,17 @@ package com.example.hitchecker.service;
 import com.example.hitchecker.dto.HitCheckRequest;
 import com.example.hitchecker.dto.HitCheckGraphRequest;
 import com.example.hitchecker.dto.HitResultResponse;
+import com.example.hitchecker.dto.HitTableRequest;
+import com.example.hitchecker.dto.HitTableResponse;
 import com.example.hitchecker.entity.HitResult;
 import com.example.hitchecker.entity.User;
 import com.example.hitchecker.repository.HitResultRepository;
 import com.example.hitchecker.repository.UserRepository;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -60,7 +67,7 @@ public class HitCheckService {
             throw new IllegalArgumentException("R must be between 0 and 5");
         }
         
-        return _checkHit(request.getX(), request.getY(), request.getR(), username);
+        return _checkHit(request.getX().floatValue(), request.getY(), request.getR(), username);
     }
 
     public HitResultResponse checkHitGraph(HitCheckGraphRequest request, String username) {
@@ -74,15 +81,22 @@ public class HitCheckService {
         return _checkHit(request.getX(), request.getY(), request.getR(), username);
     }
     
-    @Transactional
-    public List<HitResultResponse> getResults(String username) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
-        
-        return hitResultRepository.findByUserOrderByDateTimeDesc(user)
-                .stream()
-                .map(this::convertToResponse)
-                .collect(Collectors.toList());
+    @Transactional(readOnly = true)
+    public HitTableResponse getResults(HitTableRequest request) {
+        Pageable pageable = PageRequest.of(request.getPage(), request.getPageSize(), Sort.by("dateTime").descending());
+        Page<HitResult> hitResultsPage = hitResultRepository.findAll(pageable);
+
+        List<HitResultResponse> responseList = hitResultsPage.getContent().stream()
+                    .map(this::convertToResponse)
+                    .collect(Collectors.toList());
+
+        HitTableResponse response = new HitTableResponse();
+        response.setResults(responseList);
+        response.setTotalCount(hitResultsPage.getTotalElements());
+        response.setPage(hitResultsPage.getNumber());
+        response.setPageSize(hitResultsPage.getSize());
+
+        return response;
     }
 
     @Transactional
@@ -94,15 +108,18 @@ public class HitCheckService {
     }
     
     private HitResultResponse convertToResponse(HitResult hitResult) {
-        return new HitResultResponse(
-                hitResult.getId(),
-                hitResult.getX(),
-                hitResult.getY(),
-                hitResult.getR(),
-                hitResult.getIsHit(),
-                hitResult.getDateTime(),
-                hitResult.getExecutionTime()
-        );
+        HitResultResponse response = new HitResultResponse();
+
+        response.setUsername(hitResult.getUser().getUsername());
+        response.setId(hitResult.getId());
+        response.setX(hitResult.getX());
+        response.setY(hitResult.getY());
+        response.setR(hitResult.getR());
+        response.setIsHit(hitResult.getIsHit());
+        response.setDateTime(hitResult.getDateTime());
+        response.setExecutionTime(hitResult.getExecutionTime());
+        
+        return response;
     }
 }
 

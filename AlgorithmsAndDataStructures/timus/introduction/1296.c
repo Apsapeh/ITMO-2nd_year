@@ -49,9 +49,9 @@ int main(void) {
 
                 int tmp_sum = sum + value;
                 if (tmp_sum > max_sum)
-                    max_sum = tmp_sum; // Some code here
+                    max_sum = tmp_sum;
 
-                sum = tmp_sum >= 0 ? tmp_sum : 0; //        printf("%d\n", value);
+                sum = tmp_sum >= 0 ? tmp_sum : 0;
                 value = 0;
                 is_minus = 0;
                 break;

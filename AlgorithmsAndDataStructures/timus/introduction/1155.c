@@ -30,10 +30,10 @@ static struct Cell g_cells[] = {
         INIT_CELL_M('B',    A, C, F,       H,            C, G),
         INIT_CELL_M('C',    B, D, G,       E,            D, H),
         INIT_CELL_M('D',    A, C, H,       F,            A, E),
-        INIT_CELL_M('E',    A, F, H,       C,            D, H),
-        INIT_CELL_M('F',    B, E, G,       D,            A, E),
-        INIT_CELL_M('G',    C, F, H,       A,            B, F),
-        INIT_CELL_M('H',    D, E, G,       B,            C, G),
+        INIT_CELL_M('E',    A, F, H,       C,            H, D),
+        INIT_CELL_M('F',    B, E, G,       D,            E, A),
+        INIT_CELL_M('G',    C, F, H,       A,            F, B),
+        INIT_CELL_M('H',    D, E, G,       B,            G, C),
 };
 // clang-format on
 
@@ -41,8 +41,10 @@ static char out_buffer[4 * 1000 + 1] = {0};
 static char* buffer_cursor = out_buffer;
 
 static inline void print_to_buffer(char cell_1, char cell_2, char op) {
-    int* bc = (int*) buffer_cursor;
-    *bc = (cell_1 << 24) | (cell_2 << 16) | (op << 8) | '\n';
+    buffer_cursor[0] = cell_1;
+    buffer_cursor[1] = cell_2;
+    buffer_cursor[2] = op;
+    buffer_cursor[3] = '\n';
     buffer_cursor += 4;
 }
 
@@ -101,7 +103,8 @@ int main(void) {
                                                                            : neighbour_cell->value;
 
             if (cell_min) {
-                print_to_buffer(current_cell->name, neighbour_cell->name, '+');
+                for (uint8_t i = 0; i < cell_min; ++i)
+                    print_to_buffer(current_cell->name, neighbour_cell->name, '-');
             }
 
             current_cell->value -= cell_min;
@@ -118,6 +121,18 @@ int main(void) {
         uint8_t cell_min = current_cell->value < third_level_cell->value ? current_cell->value
                                                                          : third_level_cell->value;
 
+        if (cell_min) {
+            for (uint8_t i = 0; i < cell_min; ++i) {
+                print_to_buffer(
+                        current_cell->third_level_bridge[0]->name,
+                        current_cell->third_level_bridge[1]->name, '+'
+                );
+                print_to_buffer(current_cell->name, current_cell->third_level_bridge[0]->name, '-');
+                print_to_buffer(third_level_cell->name, current_cell->third_level_bridge[1]->name, '-');
+            }
+        }
+
+
         current_cell->value -= cell_min;
         third_level_cell->value -= cell_min;
     }
@@ -129,6 +144,6 @@ int main(void) {
             impossible();
     }
 
-    printf("%s\n", out_buffer);
+    printf("%s", out_buffer);
     return 0;
 }

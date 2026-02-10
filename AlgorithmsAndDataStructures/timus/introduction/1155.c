@@ -5,33 +5,59 @@
 struct Cell {
     char name;
     uint8_t value;
+    struct Cell* third_level;
+    struct Cell* third_level_bridge[2];
     struct Cell* neighbors[3];
 };
 
-#define INIT_CELL_M(_name, _nb1, _nb2, _nb3)                                                            \
+#define INIT_CELL_M(_name, _nb1, _nb2, _nb3, _th, _thb_1, _thb_2)                                       \
     (struct Cell) {                                                                                     \
-        .name = _name, .value = 0, .neighbors = { &g_cells[_nb1], &g_cells[_nb2], &g_cells[_nb3] }      \
+        .name = _name, .value = 0, .neighbors = {&g_cells[_nb1], &g_cells[_nb2], &g_cells[_nb3]},       \
+        .third_level = &g_cells[_th], .third_level_bridge = {                                           \
+            &g_cells[_thb_1],                                                                           \
+            &g_cells[_thb_2]                                                                            \
+        }                                                                                               \
     }
 
 enum { A, B, C, D, E, F, G, H, CELLS_COUNT };
 
+#define NEIGHBORS_COUNT 3
+
 // clang-format off
 static struct Cell g_cells[] = {
-        INIT_CELL_M('A', B, D, E),
-        INIT_CELL_M('B', A, C, F),
-        INIT_CELL_M('C', B, D, G),
-        INIT_CELL_M('D', A, C, H),
-        INIT_CELL_M('E', A, F, H),
-        INIT_CELL_M('F', B, E, G),
-        INIT_CELL_M('G', C, F, H),
-        INIT_CELL_M('H', D, E, G),
+//                      name   neighbors   3rd-level   path-to-3rd-level
+        INIT_CELL_M('A',    B, D, E,       G,            B, F),
+        INIT_CELL_M('B',    A, C, F,       H,            C, G),
+        INIT_CELL_M('C',    B, D, G,       E,            D, H),
+        INIT_CELL_M('D',    A, C, H,       F,            A, E),
+        INIT_CELL_M('E',    A, F, H,       C,            D, H),
+        INIT_CELL_M('F',    B, E, G,       D,            A, E),
+        INIT_CELL_M('G',    C, F, H,       A,            B, F),
+        INIT_CELL_M('H',    D, E, G,       B,            C, G),
 };
 // clang-format on
+
+static char out_buffer[4 * 1000 + 1] = {0};
+static char* buffer_cursor = out_buffer;
+
+static inline void print_to_buffer(char cell_1, char cell_2, char op) {
+    int* bc = (int*) buffer_cursor;
+    *bc = (cell_1 << 24) | (cell_2 << 16) | (op << 8) | '\n';
+    buffer_cursor += 4;
+}
 
 
 static inline void impossible(void) {
     printf("IMPOSSIBLE\n");
     exit(0);
+}
+
+static inline void debug(void) {
+    return;
+    printf("\n");
+    for (uint8_t i = 0; i < CELLS_COUNT; ++i) {
+        printf("%c - %d\n", g_cells[i].name, g_cells[i].value);
+    }
 }
 
 // Разрешены могут быть только дуоны первого и третьего уровней
@@ -55,7 +81,7 @@ int main(void) {
     #undef CV_M
     // clang-format on
 
-    // Количество дуонов чётно, проверка edge-cases
+    // Считаем сумму и проверяем, что количество дуонов чётно и не равно нулю
     uint16_t cells_value_sum = 0;
     for (uint8_t i = 0; i < CELLS_COUNT; ++i) {
         cells_value_sum += g_cells[i].value;
@@ -65,5 +91,44 @@ int main(void) {
         impossible();
 
 
+    // Разрешение дуонов первого уровня
+    for (uint8_t i = 0; i < CELLS_COUNT; ++i) {
+        struct Cell* current_cell = &g_cells[i];
+        for (uint8_t n = 0; n < NEIGHBORS_COUNT; ++n) {
+            struct Cell* neighbour_cell = current_cell->neighbors[n];
+
+            uint8_t cell_min = current_cell->value < neighbour_cell->value ? current_cell->value
+                                                                           : neighbour_cell->value;
+
+            if (cell_min) {
+                print_to_buffer(current_cell->name, neighbour_cell->name, '+');
+            }
+
+            current_cell->value -= cell_min;
+            neighbour_cell->value -= cell_min;
+        }
+    }
+
+    debug();
+
+    for (uint8_t i = 0; i < CELLS_COUNT; ++i) {
+        struct Cell* current_cell = &g_cells[i];
+        struct Cell* third_level_cell = current_cell->third_level;
+
+        uint8_t cell_min = current_cell->value < third_level_cell->value ? current_cell->value
+                                                                         : third_level_cell->value;
+
+        current_cell->value -= cell_min;
+        third_level_cell->value -= cell_min;
+    }
+
+    debug();
+
+    for (uint8_t i = 0; i < CELLS_COUNT; ++i) {
+        if (g_cells[i].value)
+            impossible();
+    }
+
+    printf("%s\n", out_buffer);
     return 0;
 }

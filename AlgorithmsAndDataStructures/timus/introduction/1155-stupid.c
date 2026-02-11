@@ -1,19 +1,3 @@
-#include <stdio.h>
-
-// Оптимизированный вывод за раз
-static char g_out_buffer[4 * 1000 + 1] = {0};
-static char* g_buffer_cursor = g_out_buffer;
-
-
-static inline void print_to_buffer(char cell_1, char cell_2, char op) {
-    g_buffer_cursor[0] = cell_1;
-    g_buffer_cursor[1] = cell_2;
-    g_buffer_cursor[2] = op;
-    g_buffer_cursor[3] = '\n';
-    g_buffer_cursor += 4;
-}
-
-
 // Разрешены могут быть только дуоны первого и третьего уровне
 //
 // Дуоны первого уровня, это соседние клетки
@@ -31,6 +15,21 @@ static inline void print_to_buffer(char cell_1, char cell_2, char op) {
 //    0.001 сек
 //    376 КБ
 //    367 из 2832 (11.02.26 01:30)
+
+#include <stdio.h>
+
+// Оптимизированный вывод за раз
+static char g_out_buffer[4 * 1000 + 1] = {0};
+static char* g_buffer_cursor = g_out_buffer;
+
+
+static inline void print_to_buffer(char cell_1, char cell_2, char op) {
+    g_buffer_cursor[0] = cell_1;
+    g_buffer_cursor[1] = cell_2;
+    g_buffer_cursor[2] = op;
+    g_buffer_cursor[3] = '\n';
+    g_buffer_cursor += 4;
+}
 
 
 #define FIRST_LEVEL(_a, _b, _ac, _bc)                                                                   \

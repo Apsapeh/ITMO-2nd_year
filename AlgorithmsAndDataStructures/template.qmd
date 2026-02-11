@@ -1,0 +1,22 @@
+
+---
+title: "Шаблон отчёта"
+format:
+  pdf:
+    mainfont: "Roboto"
+    sansfont: "Roboto" 
+    monofont: "Liberation Mono"
+    monofontoptions:
+      - "Scale=0.9"
+---
+
+Текст с кириллицей.
+
+```{.c}
+#include <stdio.h>
+int main() {
+    printf("Привет, мир!\n");
+    return 0;
+}
+```
+

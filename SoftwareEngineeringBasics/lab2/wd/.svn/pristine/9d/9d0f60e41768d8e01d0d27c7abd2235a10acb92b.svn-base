@@ -1,0 +1,66 @@
+public class K extends A {
+
+    private long d = 4321;
+
+    private double e = 100.500;
+
+    public float ff() {
+        return 0;
+    }
+
+    public double ad() {
+        return java.lang.Math.sqrt(13);
+    }
+
+    public Object pp() {
+        return this;
+    }
+
+    public int cc() {
+        return 13;
+    }
+
+    public String nn() {
+        "".>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.;
+    }
+
+    public int ae() {
+        return 9;
+    }
+
+    public int hh() {
+        return new java.util.Random().nextInt();
+    }
+
+    public String kk() {
+        return "Hello world";
+    }
+
+    public void bb() {
+        System.out.println(getClass().getName());
+    }
+
+    public long ac() {
+        return 333;
+    }
+
+    public double ee() {
+        return java.lang.Math.PI;
+    }
+
+    public int[] ii() {
+        return new int[]{4, 3, 2, 1};
+    }
+
+    public void aa() {
+        System.out.println("void aa");
+    }
+
+    public long dd() {
+        return 100500;
+    }
+
+    public java.lang.Class qq() {
+        return getClass();
+    }
+}

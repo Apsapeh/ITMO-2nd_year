@@ -1,0 +1,18 @@
+public class D extends null {
+
+    int af();
+
+    byte oo();
+
+    public Object pp() {
+        return this;
+    }
+
+    public String nn() {
+        return "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++";
+    }
+
+    public java.lang.Class qq() {
+        return getClass();
+    }
+}

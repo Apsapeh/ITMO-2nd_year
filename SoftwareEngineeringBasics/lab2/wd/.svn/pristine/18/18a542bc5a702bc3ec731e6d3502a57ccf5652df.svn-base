@@ -1,0 +1,6 @@
+public class D extends null {
+
+    int af();
+
+    byte oo();
+}

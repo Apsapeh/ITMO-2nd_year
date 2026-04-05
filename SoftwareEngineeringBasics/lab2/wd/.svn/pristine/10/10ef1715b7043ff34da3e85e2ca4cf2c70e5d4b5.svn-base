@@ -1,0 +1,46 @@
+public class A implements D {
+
+    private long k = 1234;
+
+    private int j = 1;
+
+    public Object rr() {
+        return null;
+    }
+
+    public Object gg() {
+        return new java.util.Random();
+    }
+
+    public int af() {
+        return -1;
+    }
+
+    public byte oo() {
+        return 4;
+    }
+
+    public void ab() {
+        System.out.println("\n");
+    }
+
+    public java.util.Set<Integer> ll() {
+        return new java.util.LinkedList<Integer>;
+    }
+
+    public String kk() {
+        return "No";
+    }
+
+    public java.util.Random mm() {
+        return new java.util.Random();
+    }
+
+    public long dd() {
+        return 99999;
+    }
+
+    public int ae() {
+        return java.lang.Math.abs(-6);
+    }
+}

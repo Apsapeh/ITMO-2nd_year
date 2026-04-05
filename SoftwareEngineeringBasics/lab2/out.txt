@@ -1,0 +1,1171 @@
+Committing transaction...
+Committed revision 1.
+Checked out revision 1.
+Archive:  ../commits/commit0.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Adding         A.java
+Adding         B.java
+Adding         D.java
+Adding         K.java
+Transmitting file data ....done
+Committing transaction...
+Committed revision 2.
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit1.zip
+  inflating: ./K.java                
+  inflating: ./bVKVFhLRx1.VVt        
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A  (bin)  bVKVFhLRx1.VVt
+A         D.java
+A         K.java
+Adding  (bin)  *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Adding  (bin)  bVKVFhLRx1.VVt
+Transmitting file data ......done
+Committing transaction...
+Committed revision 3.
+Committing transaction...
+Committed revision 4.
+At revision 4.
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+D         bVKVFhLRx1.VVt
+Archive:  ../commits/commit2.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Deleting       *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Deleting       bVKVFhLRx1.VVt
+Transmitting file data ....done
+Committing transaction...
+Committed revision 5.
+Committing transaction...
+Committed revision 6.
+At revision 6.
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit3.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data ....done
+Committing transaction...
+Committed revision 7.
+D    K.java
+A    K.java
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+A    *
+A    bVKVFhLRx1.VVt
+Updated to revision 7.
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+D         bVKVFhLRx1.VVt
+Archive:  ../commits/commit4.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Replacing      *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Deleting       bVKVFhLRx1.VVt
+Transmitting file data .....done
+Committing transaction...
+Committed revision 8.
+Committing transaction...
+Committed revision 9.
+At revision 9.
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit5.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Deleting       *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data ....done
+Committing transaction...
+Committed revision 10.
+Committing transaction...
+Committed revision 11.
+At revision 11.
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit6.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data ....done
+Committing transaction...
+Committed revision 12.
+D    K.java
+A    K.java
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+Updated to revision 12.
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit7.zip
+  inflating: ./K.java                
+  inflating: ./bVKVFhLRx1.VVt        
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A  (bin)  bVKVFhLRx1.VVt
+A         D.java
+A         K.java
+Adding  (bin)  *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Adding  (bin)  bVKVFhLRx1.VVt
+Transmitting file data ......done
+Committing transaction...
+Committed revision 13.
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+D    *
+D    K.java
+A    K.java
+D    bVKVFhLRx1.VVt
+Updated to revision 13.
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit8.zip
+  inflating: ./K.java                
+  inflating: ./bVKVFhLRx1.VVt        
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A  (bin)  bVKVFhLRx1.VVt
+A         D.java
+A         K.java
+Adding  (bin)  *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Adding  (bin)  bVKVFhLRx1.VVt
+Transmitting file data ......done
+Committing transaction...
+Committed revision 14.
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+D         bVKVFhLRx1.VVt
+Archive:  ../commits/commit9.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Replacing      *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Deleting       bVKVFhLRx1.VVt
+Transmitting file data .....done
+Committing transaction...
+Committed revision 15.
+Committing transaction...
+Committed revision 16.
+At revision 16.
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit10.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Deleting       *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data ....done
+Committing transaction...
+Committed revision 17.
+D    D.java
+A    D.java
+D    K.java
+A    K.java
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+Updated to revision 17.
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit11.zip
+  inflating: ./K.java                
+  inflating: ./bVKVFhLRx1.VVt        
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A  (bin)  bVKVFhLRx1.VVt
+A         D.java
+A         K.java
+Adding  (bin)  *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Adding  (bin)  bVKVFhLRx1.VVt
+Transmitting file data ......done
+Committing transaction...
+Committed revision 18.
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+D    *
+D    K.java
+A    K.java
+D    bVKVFhLRx1.VVt
+Updated to revision 18.
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit12.zip
+  inflating: ./K.java                
+  inflating: ./bVKVFhLRx1.VVt        
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A  (bin)  bVKVFhLRx1.VVt
+A         D.java
+A         K.java
+Adding  (bin)  *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Adding  (bin)  bVKVFhLRx1.VVt
+Transmitting file data ......done
+Committing transaction...
+Committed revision 19.
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+D    *
+A    *
+D    K.java
+A    K.java
+D    bVKVFhLRx1.VVt
+A    bVKVFhLRx1.VVt
+D    A.java
+A    A.java
+Updated to revision 19.
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+D         bVKVFhLRx1.VVt
+Archive:  ../commits/commit13.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Replacing      *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Deleting       bVKVFhLRx1.VVt
+Transmitting file data .....done
+Committing transaction...
+Committed revision 20.
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+D    *
+D    K.java
+A    K.java
+Updated to revision 20.
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit14.zip
+  inflating: ./K.java                
+  inflating: ./bVKVFhLRx1.VVt        
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A  (bin)  bVKVFhLRx1.VVt
+A         D.java
+A         K.java
+Adding  (bin)  *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Adding  (bin)  bVKVFhLRx1.VVt
+Transmitting file data ......done
+Committing transaction...
+Committed revision 21.
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+D         bVKVFhLRx1.VVt
+Archive:  ../commits/commit15.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Replacing      *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Deleting       bVKVFhLRx1.VVt
+Transmitting file data .....done
+Committing transaction...
+Committed revision 22.
+D    D.java
+A    D.java
+D    *
+A    *
+D    K.java
+A    K.java
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+Updated to revision 22.
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit16.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Deleting       *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data ....done
+Committing transaction...
+Committed revision 23.
+D    K.java
+A    K.java
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+A    *
+Updated to revision 23.
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit17.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Deleting       *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data ....done
+Committing transaction...
+Committed revision 24.
+D    K.java
+A    K.java
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+A    *
+A    bVKVFhLRx1.VVt
+Updated to revision 24.
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+D         bVKVFhLRx1.VVt
+Archive:  ../commits/commit18.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Replacing      *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Deleting       bVKVFhLRx1.VVt
+Transmitting file data .....done
+Committing transaction...
+Committed revision 25.
+D    *
+A    *
+D    K.java
+A    K.java
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+Updated to revision 25.
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit19.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Deleting       *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data ....done
+Committing transaction...
+Committed revision 26.
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit20.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Adding  (bin)  *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data .....done
+Committing transaction...
+Committed revision 27.
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+D    *
+A    *
+D    K.java
+A    K.java
+Updated to revision 27.
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit21.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Deleting       *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data ....done
+Committing transaction...
+Committed revision 28.
+D    K.java
+A    K.java
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+A    *
+A    bVKVFhLRx1.VVt
+Updated to revision 28.
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+D         bVKVFhLRx1.VVt
+Archive:  ../commits/commit22.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Replacing      *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Deleting       bVKVFhLRx1.VVt
+Transmitting file data .....done
+Committing transaction...
+Committed revision 29.
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+D    *
+A    *
+D    K.java
+A    K.java
+Updated to revision 29.
+svn: E200004: Cannot merge automatically while ignoring mergeinfo
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit23.zip
+  inflating: ./K.java                
+  inflating: ./OVFFeUnmLs.6HJ        
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+A  (bin)  OVFFeUnmLs.6HJ
+Deleting       *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Adding  (bin)  OVFFeUnmLs.6HJ
+Transmitting file data .....done
+Committing transaction...
+Committed revision 30.
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+D         OVFFeUnmLs.6HJ
+Archive:  ../commits/commit24.zip
+  inflating: ./K.java                
+  inflating: ./a06HJOVFFe.lIJ        
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  a06HJOVFFe.lIJ
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Deleting       OVFFeUnmLs.6HJ
+Adding  (bin)  a06HJOVFFe.lIJ
+Transmitting file data .....done
+Committing transaction...
+Committed revision 31.
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+D         a06HJOVFFe.lIJ
+Archive:  ../commits/commit25.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Deleting       a06HJOVFFe.lIJ
+Transmitting file data ....done
+Committing transaction...
+Committed revision 32.
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit26.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Adding  (bin)  *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data .....done
+Committing transaction...
+Committed revision 33.
+D    *
+D    K.java
+A    K.java
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+Updated to revision 33.
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit27.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Adding  (bin)  *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data .....done
+Committing transaction...
+Committed revision 34.
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+D    *
+D    K.java
+A    K.java
+D    A.java
+A    A.java
+Updated to revision 34.
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit28.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Adding  (bin)  *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data .....done
+Committing transaction...
+Committed revision 35.
+D    *
+D    K.java
+A    K.java
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+Updated to revision 35.
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit29.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Adding  (bin)  *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data .....done
+Committing transaction...
+Committed revision 36.
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit30.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Deleting       *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data ....done
+Committing transaction...
+Committed revision 37.
+D    K.java
+A    K.java
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+A    *
+Updated to revision 37.
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit31.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Deleting       *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data ....done
+Committing transaction...
+Committed revision 38.
+D    K.java
+A    K.java
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+A    *
+Updated to revision 38.
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit32.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Deleting       *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data ....done
+Committing transaction...
+Committed revision 39.
+D    K.java
+A    K.java
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+Updated to revision 39.
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit33.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./A.java                
+  inflating: ./D.java                
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data ....done
+Committing transaction...
+Committed revision 40.
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+D    K.java
+A    K.java
+Updated to revision 40.
+svn: E200004: Cannot merge automatically while ignoring mergeinfo
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit34.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Adding  (bin)  *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data .....done
+Committing transaction...
+Committed revision 41.
+D    *
+A    *
+D    K.java
+A    K.java
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+Updated to revision 41.
+svn: E200004: Cannot merge automatically while ignoring mergeinfo
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit35.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+Replacing      *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Transmitting file data .....done
+Committing transaction...
+Committed revision 42.
+D    *
+A    *
+D    K.java
+A    K.java
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+Updated to revision 42.
+svn: E200004: Cannot merge automatically while ignoring mergeinfo
+D         *
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit36.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./*                     
+  inflating: ./EhfQ2klX23.1hY        
+  inflating: ./A.java                
+  inflating: ./D.java                
+A  (bin)  *
+A         A.java
+A         B.java
+A         D.java
+A  (bin)  EhfQ2klX23.1hY
+A         K.java
+Replacing      *
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Adding  (bin)  EhfQ2klX23.1hY
+Replacing      K.java
+Transmitting file data ......done
+Committing transaction...
+Committed revision 43.
+D    A.java
+A    A.java
+D    B.java
+A    B.java
+D    D.java
+A    D.java
+D    *
+D    EhfQ2klX23.1hY
+D    K.java
+A    K.java
+Updated to revision 43.
+svn: E200004: Cannot merge automatically while ignoring mergeinfo
+D         A.java
+D         B.java
+D         D.java
+D         K.java
+Archive:  ../commits/commit37.zip
+  inflating: ./K.java                
+  inflating: ./B.java                
+  inflating: ./29Whuk4zzr.xth        
+  inflating: ./A.java                
+  inflating: ./ncKoQgCtO7.3Sz        
+  inflating: ./D.java                
+A  (bin)  29Whuk4zzr.xth
+A         A.java
+A         B.java
+A         D.java
+A         K.java
+A  (bin)  ncKoQgCtO7.3Sz
+Adding  (bin)  29Whuk4zzr.xth
+Replacing      A.java
+Replacing      B.java
+Replacing      D.java
+Replacing      K.java
+Adding  (bin)  ncKoQgCtO7.3Sz
+Transmitting file data ......done
+Committing transaction...
+Committed revision 44.

@@ -1,0 +1,38 @@
+public class B {
+
+    private int f = 1;
+
+    private byte c = 1;
+
+    public long dd() {
+        return 99999;
+    }
+
+    public int ae() {
+        return java.lang.Math.abs(-7);
+    }
+
+    public Object gg() {
+        return return getClass().getClassLoader();
+    }
+
+    public void bb() {
+        System.out.println(42);
+    }
+
+    public int hh() {
+        return new java.util.Random(10).nextInt(10);
+    }
+
+    public void ab() {
+        System.out.println("\n");
+    }
+
+    public int af() {
+        return -1;
+    }
+
+    public java.util.List<String> jj() {
+        return new java.util.ArrayList<String>();
+    }
+}

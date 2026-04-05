@@ -1,0 +1,6 @@
+public interface D {
+
+    int af();
+
+    byte oo();
+}

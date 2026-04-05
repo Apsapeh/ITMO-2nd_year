@@ -1,0 +1,70 @@
+public class A extends null implements D {
+
+    private long k = 1234;
+
+    private int j = 1;
+
+    public Object rr() {
+        return null;
+    }
+
+    public Object gg() {
+        return new java.util.Random();
+    }
+
+    public int af() {
+        return -1;
+    }
+
+    public byte oo() {
+        return 4;
+    }
+
+    public String kk() {
+        return "No";
+    }
+
+    public java.util.Random mm() {
+        return new java.util.Random();
+    }
+
+    public int hh() {
+        return new java.util.Random(10).nextInt(10);
+    }
+
+    public float ff() {
+        return 3.14;
+    }
+
+    public void aa() {
+        System.out.println("Hello world!");
+    }
+
+    public void ab() {
+        System.out.println("\n");
+    }
+
+    public java.util.Set<Integer> ll() {
+        return new java.util.LinkedList<Integer>;
+    }
+
+    public long dd() {
+        return 99999;
+    }
+
+    public java.util.List<String> jj() {
+        return new java.util.ArrayList<String>();
+    }
+
+    public Object pp() {
+        return this;
+    }
+
+    public long ac() {
+        return 111;
+    }
+
+    public int ae() {
+        return java.lang.Math.abs(-6);
+    }
+}

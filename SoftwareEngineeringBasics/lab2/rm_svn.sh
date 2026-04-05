@@ -1,4 +1,4 @@
 #!/bin/bash
 
 rm -rf repo
-rm -rf wd
+rm -rf wc

@@ -14,10 +14,10 @@ function blue() {
 
 function commit() {
   # Очищаем всё, --force чтоб наверняка
-  svn rm $(ls) --force
+  svn rm src/* --force
   # Добавляем новое состоеяни
-  unzip ${COMMITS}/commit${1}.zip -d .
-  svn add * --force
+  unzip ${COMMITS}/commit${1}.zip -d src
+  svn add src src/* --force
   svn commit -m "Revision: $1" --username $USER
 }
 
@@ -61,12 +61,6 @@ function merge() {
   done
 
   commit $2
-  ## 
-  # svn rm $(ls) --force
-  # unzip -o ${COMMITS}/commit${2}.zip -d .
-  # svn resolved . --depth=infinity 2>/dev/null || true
-  # svn add * --force
-  # svn commit -m "Revision: $2" --username $USER
 }
 
 
@@ -78,13 +72,13 @@ cd repo
 svn mkdir -m "Lab 2 SVN" $REPO_URL/trunk $REPO_URL/branches
 cd ..
 
-svn checkout $REPO_URL/trunk/ wd
-cd wd
+svn checkout $REPO_URL/trunk/ wc
+cd wc
 
 # 0
-unzip ${COMMITS}/commit0.zip -d .
-svn add * --force
-svn commit -m "INIT COMMIT" --username $USER
+unzip ${COMMITS}/commit0.zip -d src
+svn add src src/* --force
+svn commit -m "INIT COMMIT, r0" --username $USER
 
 # 1
 red

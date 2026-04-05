@@ -47,11 +47,21 @@ _start:
     exit ;
 
     loop_body:
-        r> dup >r
+        r> dup dup >r
+        is_even
+        if else
         lit 1
         +
         +
-    loop_start ;
+        loop_start ;
+        else:
+        drop
+        loop_start ;
+
+is_even:
+    lit 0x1
+    and
+    ;
     
 exit:
     @p output_addr a! !

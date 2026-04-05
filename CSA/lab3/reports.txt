@@ -1,1 +1,4 @@
 acc32: https://wrench.edu.swampbuds.me/report/6959a9af-6a01-442e-af9e-e2fd649ff448
+
+f32a правильный, но медленный: https://wrench.edu.swampbuds.me/report/8112e36c-9d53-4bae-88ec-8f5c920c4890
+f32a оптимизированный: https://wrench.edu.swampbuds.me/report/6abfeb90-e00e-4616-8c7a-59e5c80f41d1

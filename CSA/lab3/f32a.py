@@ -9,7 +9,10 @@ def sum_even_n(n):
     return total
 
 print(sum_even_n(100000))
-
+print(sum_even_n(110000))
+print((2 ** 31 - 1) - sum_even_n(92680))
+print((2 ** 31 - 1) - sum_even_n(92681))
+print((2 ** 31 - 1) - sum_even_n(92682))
 
 assert sum_even_n(5) == 6
 assert sum_even_n(10) == 30

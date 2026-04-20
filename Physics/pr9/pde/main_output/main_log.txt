@@ -1,0 +1,16 @@
+FlexPDE Version 8.01/OSXm  12:29:46 Mar  6 2025  Time:12:54:36 4/14/26  Darwin(Timofeys-MacBook-Air.local)  25.3.0  Darwin Kernel Version 25.3.0: Fri Dec  5 23:11:35 PST 2025; root:xnu-12377.80.260.0.1~42/RELEASE_ARM64_T8103  arm64
+Format:
+ +   wall | charged | 
+ +  clock |   CPU   | ...progress data...).
+
+START /Users/ghost/Desktop/Itmo/2nd_year/Physics/pr9/pde/main.pde  12:54:36 4/14/26
+ +    0:00|     0:00| Mesh Import Failed 
+ +    0:00|     0:00| Mesh Generation Complete 
+ +    0:00|     0:00| Mesh dump written to /Users/ghost/Desktop/Itmo/2nd_year/Physics/pr9/pde/main_output/main_initialmesh.xfr 
+ +    0:00|     0:00|  4 Threads  Cubic (3)   
+ +    0:00|     0:00| (1)Linear Step 1 Error= 10.08233 Orthomin/ILU(17)
+ +    0:00|     0:00| (1)Linear Step 2 Error= 2.082e-9 Orthomin/ILU(19)
+ +    0:00|     0:00| GRID 1 Nodes=109 Cells=180 DOF=865 RMS ERR= 2.725e-4 MAX ERR= 5.216e-4 MEM(KiB)=4707
+ +    0:00|     0:00| --DONE-- 12:54:36 4/14/26
+
+ Problem Time:12:54:37 4/14/26  Elapsed Time:00:00:01

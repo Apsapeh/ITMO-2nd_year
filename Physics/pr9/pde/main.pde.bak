@@ -1,0 +1,37 @@
+TITLE 'Simple diffusion equation'
+
+{ this problem lacks sources and boundary conditions }
+
+VARIABLES        
+
+u
+
+DEFINITIONS
+
+k=3        { conductivity }
+
+EQUATIONS
+
+div(k*grad(u)) =0
+
+BOUNDARIES
+
+REGION 1
+
+    START(0,0)
+
+VALUE(u) = 0        LINE TO (9,0)        { fixed value on bottom }
+
+NATURAL(u)=15        LINE TO (9,7)        { insulated right side }
+
+VALUE(u)=1                LINE TO (0,7)        { fixed value on top }
+
+NATURAL(u)=0        LINE TO CLOSE        { insulated left side }
+
+PLOTS
+
+CONTOUR(u)
+
+VECTOR(k*grad(u))
+
+END

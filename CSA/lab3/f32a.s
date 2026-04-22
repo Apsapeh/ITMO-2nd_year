@@ -18,19 +18,18 @@
 
 input_addr:      .word  0x80
 output_addr:     .word  0x84
+word_max_value:  .word  0x7FFFFFFF
 
+.org 0x88
     .text
-
 
 _start:
     @p input_addr a! @
 
     \ if n <= 0:
     \     return -1
-    dup
-    if leq_check
-    dup
-    -if over_leq_check
+    dup if leq_check
+    dup -if over_leq_check
 leq_check:
     lit -1
     exit ;
@@ -38,25 +37,41 @@ over_leq_check:
 
     >r                       \ range(n)
     lit 0                    \ total = 0
-
-loop_start:
-    next loop_body
+loop:
+    r> dup >r \ i
+    iter
+    next loop
     exit ;                   \ End of program
 
-loop_body:
-    r> dup dup >r
-    check_even
-    if else                  \ i % 2 == 0
-    lit 1 + +
-    loop_start ;
-else:
+
+iter: \ (total, i) -> total_new
+    dup check_odd
+    if is_even
     drop
-    loop_start ;
-
-
-check_even:
-    lit 0x00000001 and       \ Bit Mask
     ;
+
+    is_even:
+    +
+    \ Overflow checking
+    dup a!
+    inv 1 + \  -(total + i)
+    @p word_max_value  \ 2^31 - 1
+    + 
+    -if not_overflow
+    overflow_exit ;
+    not_overflow:
+    a
+    ;
+
+
+check_odd:
+    0x00000001 and
+    ;
+
+
+overflow_exit:
+    0xCCCCCCCC
+    exit ;
 
 
 exit:

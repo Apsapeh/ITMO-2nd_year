@@ -1,3 +1,5 @@
+use plotters::prelude::*;
+
 fn main() {
     let D = 15;
     let M = 1;
@@ -70,7 +72,6 @@ fn main() {
         prev_plate = plate;
     }
 
-
     for j in 0..7 {
         print!("|");
         for i in 0..9 {
@@ -79,6 +80,29 @@ fn main() {
         println!();
     }
 
+    draw(plate).unwrap();
 
     println!("Hello, world!");
+}
+
+fn draw(plate: [[f64; 9]; 7]) -> Result<(), Box<dyn std::error::Error>> {
+    let root_drawing_area = BitMapBackend::new("plot-out/main.png", (900, 700)).into_drawing_area();
+    let child_drawing_areas = root_drawing_area.split_evenly((7, 9));
+    
+    for (id, area) in child_drawing_areas.into_iter().enumerate() {
+        let x = id % 9;
+        let y = id / 9;
+        area.fill(&spectral_color(plate[y][x])).unwrap();
+        println!("id: {}", id);
+    }
+
+    root_drawing_area.present()?;
+    Ok(())
+}
+
+fn spectral_color(v: f64) -> HSLColor {
+    let t = (v / 16.0).clamp(0.0, 1.0);
+    let t = 1.0 - t;
+    let hue = t * 300.0;
+    HSLColor(hue / 360.0, 1.0, 0.5)
 }

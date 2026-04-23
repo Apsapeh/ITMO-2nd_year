@@ -1,1 +1,338 @@
 START THREAD 1 main 
+
+================================================================
+===  FlexPDE Version 8.01/L64  09:45:30 Mar  6 2025  Copyright (c) 1996-2023 PDE Solutions Inc.
+===  /home/ghost/Desktop/itmo/2nd/Physics/10/main.pde 00:50:58 4/21/26
+================================================================
+    1| TITLE 'K'
+    2| 
+    3| VARIABLES        
+    4| u
+    5| 
+    6| DEFINITIONS
+    7| k = 450              
+    8| h = 25              
+    9| u_env = 20          
+   10| 
+   11| { Центр масс }
+   12| area = SURF_INTEGRAL(1) 
+   13| Xc = SURF_INTEGRAL(x) / area
+   14| Yc = SURF_INTEGRAL(y) / area
+   15| 
+   16| { Лазер }
+   17| q0 = 50000          
+   18| R = 0.3             
+   19| Q = q0 * exp(-((x - Xc)^2 + (y - Yc)^2) / R^2)
+   20| 
+   21| EQUATIONS
+   22| div(k*grad(u)) + Q = 0
+   23| 
+   24| BOUNDARIES
+   25| REGION 1
+   26| START(0,0)
+   27| VALUE(u) = 200                  LINE TO (1,0)        
+   28| NATURAL(u) = -h*(u - u_env)     LINE TO (1, 1.5)     
+   29| NATURAL(u) = -h*(u - u_env)     LINE TO (2, 0)       
+   30| VALUE(u) = 200                  LINE TO (3, 0)       
+   31| NATURAL(u) = -h*(u - u_env)     LINE TO (1.5, 2)     
+   32| NATURAL(u) = -h*(u - u_env)     LINE TO (3, 4)       
+   33| NATURAL(u) = -h*(u - u_env)     LINE TO (2, 4)       
+   34| NATURAL(u) = -h*(u - u_env)     LINE TO (1, 2.5)     
+   35| NATURAL(u) = -h*(u - u_env)     LINE TO (1, 4)       
+   36| NATURAL(u) = -h*(u - u_env)     LINE TO (0, 4)       
+   37| NATURAL(u) = -h*(u - u_env)     LINE TO CLOSE        
+   38| 
+   39| PLOTS
+   40| CONTOUR(u)
+   41| SURFACE(u)
+   42| END
+FlexPDE Lite Version 8.01/L64 3D
+Copyright (c) 1996-2023 PDE Solutions Inc.
+FlexPDE Lite Version 8.01/L64 3D
+Copyright (c) 1996-2023 PDE Solutions Inc.
+FlexPDE Lite Version 8.01/L64 3D
+Copyright (c) 1996-2023 PDE Solutions Inc.
+STUDENT VERSION SETS GROW2=0.35 GRIDARC=30
+IMPORTMESH(/home/ghost/Desktop/itmo/2nd/Physics/10/main_output/main_initialmesh.xfr) 
+Trap=0 NDIM=2 NB=10 NAB=3 NODES=81 CELLS=112 SIDES=192 LEGS=0 imaging=0 time(0)=0
+MESH IMPORT ABORTED: Different GRID2D
+Transferred mesh does not match local domain!
+(Boundary descriptions must match exactly.)
+ABORT IMPORT, CHECK_AUTOMESH_HEADER FAILED
+
+==========================
+ SUMMARIZE PARAMETERS
+==========================
+ Param   name     Type       Domain               Definition
+-------------------------------------------------------------------------------
+    1      K       Scalar  (GLOBAL)               :  450
+                                                  =>  450
+    2      H       Scalar  (GLOBAL)               :  25
+                                                  =>  25
+    3  U_ENV       Scalar  (GLOBAL)               :  20
+                                                  =>  20
+    4   AREA       Scalar  (GLOBAL)               : Bintegral#1
+                                                  => Bintegral#1
+    5     XC       Scalar  (GLOBAL)               : Bintegral#2/AREA
+                                                  => Bintegral#2/Bintegral#1
+    6     YC       Scalar  (GLOBAL)               : Bintegral#3/AREA
+                                                  => Bintegral#3/Bintegral#1
+    7     Q0       Scalar  (GLOBAL)               :  50000
+                                                  =>  50000
+    8      R       Scalar  (GLOBAL)               :  0.30000
+                                                  =>  0.30000
+    9      Q       Scalar  (GLOBAL)               : Q0*Exp(-((Sqr(X-XC)+Sqr(Y-YC))/Sqr(R)))
+                                                  =>  50000*Exp(-((Sqr(X-(Bintegral#2/Bintegral#1))+Sqr(Y-(Bintegral#3/Bintegral#1)))* 11.1111))
+
+
+
+==========================
+SUMMARIZE EQUATIONS
+==========================
+In the following equation definitions
+Derivatives are represented by appending a dot and the differentiated coordinate.
+The operator <V> represents volume integration. 
+<Vb> is weighted by basis function.
+<Vu> is weighted by the upwind modifer. 
+<Vbu> is weighted by both.
+A dotted volume integral (eg, <Vb.x>) represents volume integration weighted by the indicated
+derivative of the basis function.
+'tri3', 'tet20', etc., represents a basis function in the indicated basis.
+The operator <S.c> represents surface integration weighted by the indicated
+direction cosine.
+
+--------------------------------------------------------------------------------------------------
+
+PRIMARY EQUATIONS
+--------------------
+        DEFINES REGION/  DEPENDS                       BASE        CSE
+EQUATION    VAR  BLOCK    ON VAR        FUNCTION  COMPLEXITY COMPLEXITY    MEMORY           DEFINITION
+--------------------------------------------------------------------------------------------------------------
+     1        U                 Generic Equation                                  : ((DIV(K*(GRAD(U))))+Q)- 0
+                                    LHS Equation         11         11        704 : (DX( 450*(DX(U))))+(DY( 450*(DY(U))))
+                                          Source         20         21       1344 : <Vb>(-( 50000*Exp(-((Sqr(X-(Bintegral#2/Bintegral#1))+Sqr(Y-(Bintegral#3/Bintegral#1)))* 11.1111))))
+                                  Space Galerkin         18         10        640 : -((<Vb.X>( 450*U.X))+(<Vb.Y>( 450*U.Y)))
+                              U   Space Jacobian         18         10        640 : -((<Vb.X>( 450*tri10.X))+(<Vb.Y>( 450*tri10.Y)))
+                                Surface Galerkin          9          9        576 : (<S.X>( 450*U.X))+(<S.Y>( 450*U.Y))
+                              U Surface Jacobian          9          9        576 : (<S.X>( 450*tri10.X))+(<S.Y>( 450*tri10.Y))
+
+
+EQUATION 1 PARAMETER DEPENDENCIES:
+            K         AREA           XC           YC           Q0            R            Q
+
+========================================================
+     SUMMARIZE BOUNDARY CONDITIONS
+========================================================
+
+BOUNDARY CONDITION TAGS with associated BC INDEX
+BC SET   1: BC(  U)= val(1)
+            
+BC SET   2: BC(  U)= nat(2)
+            
+
+    BC  KIND   DEFINES REGION  DEPENDS     FUNCTION  COMPLEXITY    MEMORY    DEFINITION
+-----------------------------------------------------------------------------------------------------
+     1   VAL        U       1         Surf Galerkin          3        192 : U- 200
+                                  U   Surf Jacobian          1         64 : tri10
+     2   NAT        U       1         Surf Galerkin          6        384 : <S0>( 25*( 20-U))
+                                  U   Surf Jacobian          5        320 : <S0>(-( 25*tri10))
+
+===============================
+  SUMMARIZE PLOTS
+===============================
+                      REGION/       BASE        CSE
+  PLOT    TYPE     COMPARTMENT  COMPLEXITY  COMPLEXITY    MEMORY    DEFINITION
+------------------------------------------------------------------------------
+     1     CONTOUR          0          1          1           64 : U
+     2     SURFACE          0          1          1           64 : U
+
+================================
+SUMMARIZE FITS AND INTEGRALS
+=================================
+                             REGION/       BASE        CSE
+    FIT         KIND       COMPARTMENT  COMPLEXITY  COMPLEXITY  MEMORY  DEFINITION
+-----------------------------------------------------------------------------------------
+     1     Boundary Integal       1           1          1         64     :  1
+     2     Boundary Integal       1           1          1         64     : X
+     3     Boundary Integal       1           1          1         64     : Y
+
+
+=== 0 STORED COMMON SUBEXPRESSIONS === 
+
+
+==UNUSED== PARAMETER DEFINITIONS:
+
+LOG Threads=4 Order=3 Speed=1 Stability=0
+CG it=21 itlimit=2024 Flag=Ok Xnorm=1997.07
+Linear Step 1 Error= 1997.073::2e-06 Orthomin/ILU
+CG it=22 itlimit=2024 Flag=Ok Xnorm=6.6572e-06
+Linear Step 2 Error= 6.657e-6::2e-06 Orthomin/ILU
+CG it=25 itlimit=2024 Flag=Ok Xnorm=2.57148e-14
+Linear Step 3 Error= 2.57e-14::2e-06 Orthomin/ILU
+RMS Spatial Errors   4.114e-4
+
+================================================================
+===  FlexPDE Version 8.01/L64  09:45:30 Mar  6 2025  Copyright (c) 1996-2023 PDE Solutions Inc.
+===  /home/ghost/Desktop/itmo/2nd/Physics/10/main.pde 01:09:06 4/21/26
+================================================================
+    1| TITLE 'K'
+    2| 
+    3| VARIABLES        
+    4| u
+    5| 
+    6| DEFINITIONS
+    7| k = 450              
+    8| h = 25              
+    9| u_env = 20          
+   10| 
+   11| { Центр масс }
+   12| area = SURF_INTEGRAL(1) 
+   13| Xc = SURF_INTEGRAL(x) / area
+   14| Yc = SURF_INTEGRAL(y) / area
+   15| 
+   16| { Лазер }
+   17| q0 = 50000          
+   18| R = 0.3             
+   19| Q = q0 * exp(-((x - Xc)^2 + (y - Yc)^2) / R^2)
+   20| 
+   21| EQUATIONS
+   22| div(k*grad(u)) + Q = 0
+   23| 
+   24| BOUNDARIES
+   25| REGION 1
+   26| START(0,0)
+   27| VALUE(u) = 200                  LINE TO (1,0)        
+   28| NATURAL(u) = -h*(u - u_env)     LINE TO (1, 1.5)     
+   29| NATURAL(u) = -h*(u - u_env)     LINE TO (2, 0)       
+   30| VALUE(u) = 200                  LINE TO (3, 0)       
+   31| NATURAL(u) = -h*(u - u_env)     LINE TO (1.5, 2)     
+   32| NATURAL(u) = -h*(u - u_env)     LINE TO (3, 4)       
+   33| NATURAL(u) = -h*(u - u_env)     LINE TO (2, 4)       
+   34| NATURAL(u) = -h*(u - u_env)     LINE TO (1, 2.5)     
+   35| NATURAL(u) = -h*(u - u_env)     LINE TO (1, 4)       
+   36| NATURAL(u) = -h*(u - u_env)     LINE TO (0, 4)       
+   37| NATURAL(u) = -h*(u - u_env)     LINE TO CLOSE        
+   38| 
+   39| PLOTS
+   40| CONTOUR(u)
+   41| SURFACE(u)
+   42| END
+STUDENT VERSION SETS GROW2=0.35 GRIDARC=30
+IMPORTMESH(/home/ghost/Desktop/itmo/2nd/Physics/10/main_output/main_initialmesh.xfr) 
+Trap=0 NDIM=2 NB=10 NAB=3 NODES=81 CELLS=112 SIDES=192 LEGS=0 imaging=0 time(0)=0
+MESH IMPORT ABORTED: Different GRID2D
+Transferred mesh does not match local domain!
+(Boundary descriptions must match exactly.)
+ABORT IMPORT, CHECK_AUTOMESH_HEADER FAILED
+
+==========================
+ SUMMARIZE PARAMETERS
+==========================
+ Param   name     Type       Domain               Definition
+-------------------------------------------------------------------------------
+    1      K       Scalar  (GLOBAL)               :  450
+                                                  =>  450
+    2      H       Scalar  (GLOBAL)               :  25
+                                                  =>  25
+    3  U_ENV       Scalar  (GLOBAL)               :  20
+                                                  =>  20
+    4   AREA       Scalar  (GLOBAL)               : Bintegral#1
+                                                  => Bintegral#1
+    5     XC       Scalar  (GLOBAL)               : Bintegral#2/AREA
+                                                  => Bintegral#2/Bintegral#1
+    6     YC       Scalar  (GLOBAL)               : Bintegral#3/AREA
+                                                  => Bintegral#3/Bintegral#1
+    7     Q0       Scalar  (GLOBAL)               :  50000
+                                                  =>  50000
+    8      R       Scalar  (GLOBAL)               :  0.30000
+                                                  =>  0.30000
+    9      Q       Scalar  (GLOBAL)               : Q0*Exp(-((Sqr(X-XC)+Sqr(Y-YC))/Sqr(R)))
+                                                  =>  50000*Exp(-((Sqr(X-(Bintegral#2/Bintegral#1))+Sqr(Y-(Bintegral#3/Bintegral#1)))* 11.1111))
+
+
+
+==========================
+SUMMARIZE EQUATIONS
+==========================
+In the following equation definitions
+Derivatives are represented by appending a dot and the differentiated coordinate.
+The operator <V> represents volume integration. 
+<Vb> is weighted by basis function.
+<Vu> is weighted by the upwind modifer. 
+<Vbu> is weighted by both.
+A dotted volume integral (eg, <Vb.x>) represents volume integration weighted by the indicated
+derivative of the basis function.
+'tri3', 'tet20', etc., represents a basis function in the indicated basis.
+The operator <S.c> represents surface integration weighted by the indicated
+direction cosine.
+
+--------------------------------------------------------------------------------------------------
+
+PRIMARY EQUATIONS
+--------------------
+        DEFINES REGION/  DEPENDS                       BASE        CSE
+EQUATION    VAR  BLOCK    ON VAR        FUNCTION  COMPLEXITY COMPLEXITY    MEMORY           DEFINITION
+--------------------------------------------------------------------------------------------------------------
+     1        U                 Generic Equation                                  : ((DIV(K*(GRAD(U))))+Q)- 0
+                                    LHS Equation         11         11        704 : (DX( 450*(DX(U))))+(DY( 450*(DY(U))))
+                                          Source         20         21       1344 : <Vb>(-( 50000*Exp(-((Sqr(X-(Bintegral#2/Bintegral#1))+Sqr(Y-(Bintegral#3/Bintegral#1)))* 11.1111))))
+                                  Space Galerkin         18         10        640 : -((<Vb.X>( 450*U.X))+(<Vb.Y>( 450*U.Y)))
+                              U   Space Jacobian         18         10        640 : -((<Vb.X>( 450*tri10.X))+(<Vb.Y>( 450*tri10.Y)))
+                                Surface Galerkin          9          9        576 : (<S.X>( 450*U.X))+(<S.Y>( 450*U.Y))
+                              U Surface Jacobian          9          9        576 : (<S.X>( 450*tri10.X))+(<S.Y>( 450*tri10.Y))
+
+
+EQUATION 1 PARAMETER DEPENDENCIES:
+            K         AREA           XC           YC           Q0            R            Q
+
+========================================================
+     SUMMARIZE BOUNDARY CONDITIONS
+========================================================
+
+BOUNDARY CONDITION TAGS with associated BC INDEX
+BC SET   1: BC(  U)= val(1)
+            
+BC SET   2: BC(  U)= nat(2)
+            
+
+    BC  KIND   DEFINES REGION  DEPENDS     FUNCTION  COMPLEXITY    MEMORY    DEFINITION
+-----------------------------------------------------------------------------------------------------
+     1   VAL        U       1         Surf Galerkin          3        192 : U- 200
+                                  U   Surf Jacobian          1         64 : tri10
+     2   NAT        U       1         Surf Galerkin          6        384 : <S0>( 25*( 20-U))
+                                  U   Surf Jacobian          5        320 : <S0>(-( 25*tri10))
+
+===============================
+  SUMMARIZE PLOTS
+===============================
+                      REGION/       BASE        CSE
+  PLOT    TYPE     COMPARTMENT  COMPLEXITY  COMPLEXITY    MEMORY    DEFINITION
+------------------------------------------------------------------------------
+     1     CONTOUR          0          1          1           64 : U
+     2     SURFACE          0          1          1           64 : U
+
+================================
+SUMMARIZE FITS AND INTEGRALS
+=================================
+                             REGION/       BASE        CSE
+    FIT         KIND       COMPARTMENT  COMPLEXITY  COMPLEXITY  MEMORY  DEFINITION
+-----------------------------------------------------------------------------------------
+     1     Boundary Integal       1           1          1         64     :  1
+     2     Boundary Integal       1           1          1         64     : X
+     3     Boundary Integal       1           1          1         64     : Y
+
+
+=== 0 STORED COMMON SUBEXPRESSIONS === 
+
+
+==UNUSED== PARAMETER DEFINITIONS:
+
+LOG Threads=4 Order=3 Speed=1 Stability=0
+CG it=21 itlimit=2024 Flag=Ok Xnorm=1997.07
+Linear Step 1 Error= 1997.073::2e-06 Orthomin/ILU
+CG it=22 itlimit=2024 Flag=Ok Xnorm=6.6572e-06
+Linear Step 2 Error= 6.657e-6::2e-06 Orthomin/ILU
+CG it=25 itlimit=2024 Flag=Ok Xnorm=2.57307e-14
+Linear Step 3 Error= 2.57e-14::2e-06 Orthomin/ILU
+RMS Spatial Errors   4.114e-4
+END main 01:11:01 4/21/26

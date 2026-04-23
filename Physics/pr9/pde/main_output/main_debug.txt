@@ -1,8 +1,8 @@
-START THREAD 1 main 
+START THREAD 2 main 
 
 ================================================================
-===  FlexPDE Version 8.01/OSXm  12:29:46 Mar  6 2025  Copyright (c) 1996-2023 PDE Solutions Inc.
-===  /Users/ghost/Desktop/Itmo/2nd_year/Physics/pr9/pde/main.pde 12:54:36 4/14/26
+===  FlexPDE Version 8.01/L64  09:45:30 Mar  6 2025  Copyright (c) 1996-2023 PDE Solutions Inc.
+===  /home/ghost/Desktop/itmo/2nd/Physics/pr9/pde/main.pde 01:11:03 4/21/26
 ================================================================
     1| TITLE 'Corrected diffusion equation'
     2| 
@@ -49,14 +49,8 @@ START THREAD 1 main
    43|     SURFACE(u)
    44| 
    45| END
-FlexPDE Lite Version 8.01/OSXm 3D
-Copyright (c) 1996-2023 PDE Solutions Inc.
-FlexPDE Lite Version 8.01/OSXm 3D
-Copyright (c) 1996-2023 PDE Solutions Inc.
-FlexPDE Lite Version 8.01/OSXm 3D
-Copyright (c) 1996-2023 PDE Solutions Inc.
 STUDENT VERSION SETS GROW2=0.35 GRIDARC=30
-IMPORTMESH(/Users/ghost/Desktop/Itmo/2nd_year/Physics/pr9/pde/main_output/main_initialmesh.xfr) 
+IMPORTMESH(/home/ghost/Desktop/itmo/2nd/Physics/pr9/pde/main_output/main_initialmesh.xfr) 
 Trap=0 NDIM=2 NB=10 NAB=3 NODES=109 CELLS=180 SIDES=288 LEGS=0 imaging=0 time(0)=0
 MESH IMPORT ABORTED: Different GRID2D
 Transferred mesh does not match local domain!
@@ -159,8 +153,606 @@ BC SET   4: BC(  U)= val(4)
 ==UNUSED== PARAMETER DEFINITIONS:
 
 LOG Threads=4 Order=3 Speed=1 Stability=0
-CG it=17 itlimit=2029 Flag=Ok Xnorm=10.0823
-Linear Step 1 Error= 10.08233::2e-06 Orthomin/ILU
-CG it=19 itlimit=2029 Flag=Ok Xnorm=2.08239e-09
-Linear Step 2 Error= 2.082e-9::2e-06 Orthomin/ILU
-RMS Spatial Errors   5.370e-4
+CG it=17 itlimit=2029 Flag=Ok Xnorm=10.1602
+Linear Step 1 Error= 10.16019::2e-06 Orthomin/ILU
+CG it=20 itlimit=2029 Flag=Ok Xnorm=2.78438e-09
+Linear Step 2 Error= 2.784e-9::2e-06 Orthomin/ILU
+RMS Spatial Errors   5.369e-4
+
+================================================================
+===  FlexPDE Version 8.01/L64  09:45:30 Mar  6 2025  Copyright (c) 1996-2023 PDE Solutions Inc.
+===  /home/ghost/Desktop/itmo/2nd/Physics/pr9/pde/main.pde 02:10:44 4/21/26
+================================================================
+    1| TITLE '9-10'
+    2| 
+    3| VARIABLES
+    4|     u
+    5| 
+    6| DEFINITIONS
+    7|     k = 3
+    8|     A = 15
+    9|     B = 1
+   10|     L = 9
+   11|     H = 7
+   12|     
+   13|     ls_y = B + (A/6.0) * (y * (6/H))
+   14| 
+   15| EQUATIONS
+   16|     div(k*grad(u)) = 0 
+   17| 
+   18| BOUNDARIES
+   19|     REGION 1
+   20|         START(0,0)
+   21| 
+   22|         {Bottom edge}
+   23|         VALUE(u) = (x/L)*B             LINE TO (L,0)
+   24| 
+   25|         {Right edge}
+   26|         VALUE(u) = ls_y                LINE TO (L,H)
+   27| 
+   28|         {Top edge}
+   29|         VALUE(u) = (x/L)*A             LINE TO (0,H)
+   30| 
+   31|         {Left edge}
+   32|         VALUE(u) = 0                   LINE TO CLOSE
+   33| 
+   34| PLOTS
+   35|     CONTOUR(u)
+   36|     VECTOR(-k*grad(u))    { Поток тепла идет от горячего к холодному, нужен минус }
+   37|     SURFACE(u)
+   38| 
+   39| END
+STUDENT VERSION SETS GROW2=0.35 GRIDARC=30
+IMPORTMESH(/home/ghost/Desktop/itmo/2nd/Physics/pr9/pde/main_output/main_initialmesh.xfr) 
+Trap=0 NDIM=2 NB=10 NAB=3 NODES=108 CELLS=178 SIDES=285 LEGS=0 imaging=0 time(0)=0
+MESH IMPORT ABORTED: Different GRID2D
+Transferred mesh does not match local domain!
+(Boundary descriptions must match exactly.)
+ABORT IMPORT, CHECK_AUTOMESH_HEADER FAILED
+
+==========================
+ SUMMARIZE PARAMETERS
+==========================
+ Param   name     Type       Domain               Definition
+-------------------------------------------------------------------------------
+    1     K       Scalar  (GLOBAL)               :  3
+                                                 =>  3
+    2     A       Scalar  (GLOBAL)               :  15
+                                                 =>  15
+    3     B       Scalar  (GLOBAL)               :  1
+                                                 =>  1
+    4     L       Scalar  (GLOBAL)               :  9
+                                                 =>  9
+    5     H       Scalar  (GLOBAL)               :  7
+                                                 =>  7
+    6  LS_Y       Scalar  (GLOBAL)               : B+(( 0.16667*(A*(Y* 6)))/H)
+                                                 =>  1+((Y* 15)/ 7)
+
+
+
+==========================
+SUMMARIZE EQUATIONS
+==========================
+In the following equation definitions
+Derivatives are represented by appending a dot and the differentiated coordinate.
+The operator <V> represents volume integration. 
+<Vb> is weighted by basis function.
+<Vu> is weighted by the upwind modifer. 
+<Vbu> is weighted by both.
+A dotted volume integral (eg, <Vb.x>) represents volume integration weighted by the indicated
+derivative of the basis function.
+'tri3', 'tet20', etc., represents a basis function in the indicated basis.
+The operator <S.c> represents surface integration weighted by the indicated
+direction cosine.
+
+--------------------------------------------------------------------------------------------------
+
+PRIMARY EQUATIONS
+--------------------
+        DEFINES REGION/  DEPENDS                       BASE        CSE
+EQUATION    VAR  BLOCK    ON VAR        FUNCTION  COMPLEXITY COMPLEXITY    MEMORY           DEFINITION
+--------------------------------------------------------------------------------------------------------------
+     1        U                 Generic Equation                                  : (DIV(K*(GRAD(U))))- 0
+                                    LHS Equation         11         11        704 : (DX( 3*(DX(U))))+(DY( 3*(DY(U))))
+                                          Source          1          2        128 : <Vb>( 0)
+                                  Space Galerkin         18         10        640 : -((<Vb.X>( 3*U.X))+(<Vb.Y>( 3*U.Y)))
+                              U   Space Jacobian         18         10        640 : -((<Vb.X>( 3*tri10.X))+(<Vb.Y>( 3*tri10.Y)))
+                                Surface Galerkin          9          9        576 : (<S.X>( 3*U.X))+(<S.Y>( 3*U.Y))
+                              U Surface Jacobian          9          9        576 : (<S.X>( 3*tri10.X))+(<S.Y>( 3*tri10.Y))
+
+
+EQUATION 1 PARAMETER DEPENDENCIES:
+            K
+
+========================================================
+     SUMMARIZE BOUNDARY CONDITIONS
+========================================================
+
+BOUNDARY CONDITION TAGS with associated BC INDEX
+BC SET   1: BC(  U)= val(1)
+            
+BC SET   2: BC(  U)= val(2)
+            
+BC SET   3: BC(  U)= val(3)
+            
+BC SET   4: BC(  U)= val(4)
+            
+
+    BC  KIND   DEFINES REGION  DEPENDS     FUNCTION  COMPLEXITY    MEMORY    DEFINITION
+-----------------------------------------------------------------------------------------------------
+     1   VAL        U       1         Surf Galerkin          5        320 : U-(X* 0.11111)
+                                  U   Surf Jacobian          1         64 : tri10
+     2   VAL        U       1         Surf Galerkin          9        576 : U-( 1+((Y* 15)/ 7))
+                                  U   Surf Jacobian          1         64 : tri10
+     3   VAL        U       1         Surf Galerkin          5        320 : U-(X* 1.66667)
+                                  U   Surf Jacobian          1         64 : tri10
+     4   VAL        U       1         Surf Galerkin          1         64 : U
+                                  U   Surf Jacobian          1         64 : tri10
+
+===============================
+  SUMMARIZE PLOTS
+===============================
+                      REGION/       BASE        CSE
+  PLOT    TYPE     COMPARTMENT  COMPLEXITY  COMPLEXITY    MEMORY    DEFINITION
+------------------------------------------------------------------------------
+     1     CONTOUR          0          1          1           64 : U
+     2      VECTOR          0         13         13          832 : vector(-( 3*U.X),-( 3*U.Y),-( 3*U.Z))
+     3     SURFACE          0          1          1           64 : U
+
+
+=== 0 STORED COMMON SUBEXPRESSIONS === 
+
+
+==UNUSED== PARAMETER DEFINITIONS:
+
+LOG Threads=4 Order=3 Speed=1 Stability=0
+CG it=17 itlimit=2029 Flag=Ok Xnorm=10.1602
+Linear Step 1 Error= 10.16019::2e-06 Orthomin/ILU
+CG it=20 itlimit=2029 Flag=Ok Xnorm=2.78438e-09
+Linear Step 2 Error= 2.784e-9::2e-06 Orthomin/ILU
+RMS Spatial Errors   5.369e-4
+
+================================================================
+===  FlexPDE Version 8.01/L64  09:45:30 Mar  6 2025  Copyright (c) 1996-2023 PDE Solutions Inc.
+===  /home/ghost/Desktop/itmo/2nd/Physics/pr9/pde/main.pde 02:11:08 4/21/26
+================================================================
+    1| TITLE '9-10'
+    2| 
+    3| VARIABLES
+    4|     u
+    5| 
+    6| DEFINITIONS
+    7|     k = 3
+    8|     A = 15
+    9|     B = 1
+   10|     L = 9
+   11|     H = 7
+   12|     
+   13|     ls_y = B + (A/6.0) * (y * (6/H))
+   14| 
+   15| EQUATIONS
+   16|     div(k*grad(u)) = 0 
+   17| 
+   18| BOUNDARIES
+   19|     REGION 1
+   20|         START(0,0)
+   21| 
+   22|         {Bottom edge}
+   23|         VALUE(u) = (x/L)*B             LINE TO (L,0)
+   24| 
+   25|         {Right edge}
+   26|         VALUE(u) = ls_y                LINE TO (L,H)
+   27| 
+   28|         {Top edge}
+   29|         VALUE(u) = (x/L)*A             LINE TO (0,H)
+   30| 
+   31|         {Left edge}
+   32|         VALUE(u) = 0                   LINE TO CLOSE
+   33| 
+   34| PLOTS
+   35|     CONTOUR(u)
+   36| END
+STUDENT VERSION SETS GROW2=0.35 GRIDARC=30
+IMPORTMESH(/home/ghost/Desktop/itmo/2nd/Physics/pr9/pde/main_output/main_initialmesh.xfr) 
+Trap=0 NDIM=2 NB=10 NAB=3 NODES=108 CELLS=178 SIDES=285 LEGS=0 imaging=0 time(0)=0
+MESH IMPORT ABORTED: Different GRID2D
+Transferred mesh does not match local domain!
+(Boundary descriptions must match exactly.)
+ABORT IMPORT, CHECK_AUTOMESH_HEADER FAILED
+
+==========================
+ SUMMARIZE PARAMETERS
+==========================
+ Param   name     Type       Domain               Definition
+-------------------------------------------------------------------------------
+    1     K       Scalar  (GLOBAL)               :  3
+                                                 =>  3
+    2     A       Scalar  (GLOBAL)               :  15
+                                                 =>  15
+    3     B       Scalar  (GLOBAL)               :  1
+                                                 =>  1
+    4     L       Scalar  (GLOBAL)               :  9
+                                                 =>  9
+    5     H       Scalar  (GLOBAL)               :  7
+                                                 =>  7
+    6  LS_Y       Scalar  (GLOBAL)               : B+(( 0.16667*(A*(Y* 6)))/H)
+                                                 =>  1+((Y* 15)/ 7)
+
+
+
+==========================
+SUMMARIZE EQUATIONS
+==========================
+In the following equation definitions
+Derivatives are represented by appending a dot and the differentiated coordinate.
+The operator <V> represents volume integration. 
+<Vb> is weighted by basis function.
+<Vu> is weighted by the upwind modifer. 
+<Vbu> is weighted by both.
+A dotted volume integral (eg, <Vb.x>) represents volume integration weighted by the indicated
+derivative of the basis function.
+'tri3', 'tet20', etc., represents a basis function in the indicated basis.
+The operator <S.c> represents surface integration weighted by the indicated
+direction cosine.
+
+--------------------------------------------------------------------------------------------------
+
+PRIMARY EQUATIONS
+--------------------
+        DEFINES REGION/  DEPENDS                       BASE        CSE
+EQUATION    VAR  BLOCK    ON VAR        FUNCTION  COMPLEXITY COMPLEXITY    MEMORY           DEFINITION
+--------------------------------------------------------------------------------------------------------------
+     1        U                 Generic Equation                                  : (DIV(K*(GRAD(U))))- 0
+                                    LHS Equation         11         11        704 : (DX( 3*(DX(U))))+(DY( 3*(DY(U))))
+                                          Source          1          2        128 : <Vb>( 0)
+                                  Space Galerkin         18         10        640 : -((<Vb.X>( 3*U.X))+(<Vb.Y>( 3*U.Y)))
+                              U   Space Jacobian         18         10        640 : -((<Vb.X>( 3*tri10.X))+(<Vb.Y>( 3*tri10.Y)))
+                                Surface Galerkin          9          9        576 : (<S.X>( 3*U.X))+(<S.Y>( 3*U.Y))
+                              U Surface Jacobian          9          9        576 : (<S.X>( 3*tri10.X))+(<S.Y>( 3*tri10.Y))
+
+
+EQUATION 1 PARAMETER DEPENDENCIES:
+            K
+
+========================================================
+     SUMMARIZE BOUNDARY CONDITIONS
+========================================================
+
+BOUNDARY CONDITION TAGS with associated BC INDEX
+BC SET   1: BC(  U)= val(1)
+            
+BC SET   2: BC(  U)= val(2)
+            
+BC SET   3: BC(  U)= val(3)
+            
+BC SET   4: BC(  U)= val(4)
+            
+
+    BC  KIND   DEFINES REGION  DEPENDS     FUNCTION  COMPLEXITY    MEMORY    DEFINITION
+-----------------------------------------------------------------------------------------------------
+     1   VAL        U       1         Surf Galerkin          5        320 : U-(X* 0.11111)
+                                  U   Surf Jacobian          1         64 : tri10
+     2   VAL        U       1         Surf Galerkin          9        576 : U-( 1+((Y* 15)/ 7))
+                                  U   Surf Jacobian          1         64 : tri10
+     3   VAL        U       1         Surf Galerkin          5        320 : U-(X* 1.66667)
+                                  U   Surf Jacobian          1         64 : tri10
+     4   VAL        U       1         Surf Galerkin          1         64 : U
+                                  U   Surf Jacobian          1         64 : tri10
+
+===============================
+  SUMMARIZE PLOTS
+===============================
+                      REGION/       BASE        CSE
+  PLOT    TYPE     COMPARTMENT  COMPLEXITY  COMPLEXITY    MEMORY    DEFINITION
+------------------------------------------------------------------------------
+     1     CONTOUR          0          1          1           64 : U
+
+
+=== 0 STORED COMMON SUBEXPRESSIONS === 
+
+
+==UNUSED== PARAMETER DEFINITIONS:
+
+LOG Threads=4 Order=3 Speed=1 Stability=0
+CG it=17 itlimit=2029 Flag=Ok Xnorm=10.1602
+Linear Step 1 Error= 10.16019::2e-06 Orthomin/ILU
+CG it=20 itlimit=2029 Flag=Ok Xnorm=2.78438e-09
+Linear Step 2 Error= 2.784e-9::2e-06 Orthomin/ILU
+RMS Spatial Errors   5.369e-4
+
+================================================================
+===  FlexPDE Version 8.01/L64  09:45:30 Mar  6 2025  Copyright (c) 1996-2023 PDE Solutions Inc.
+===  /home/ghost/Desktop/itmo/2nd/Physics/pr9/pde/main.pde 11:25:04 4/21/26
+================================================================
+    1| TITLE '9-10'
+    2| 
+    3| VARIABLES
+    4|     u
+    5| 
+    6| DEFINITIONS
+    7|     k = 3
+    8|     A = 15
+    9|     B = 1
+   10|     L = 9
+   11|     H = 7
+   12|     
+   13|     ls_y = B + (A/6.0) * (y * (6/H))
+   14| 
+   15| EQUATIONS
+   16|     div(k*grad(u)) = 0 
+   17| 
+   18| BOUNDARIES
+   19|     REGION 1
+   20|         START(0,0)
+   21| 
+   22|         {Bottom edge}
+   23|         VALUE(u) = (x/L)*B             LINE TO (L,0)
+   24| 
+   25|         {Right edge}
+   26|         VALUE(u) = ls_y                LINE TO (L,H)
+   27| 
+   28|         {Top edge}
+   29|         VALUE(u) = (x/L)*A             LINE TO (0,H)
+   30| 
+   31|         {Left edge}
+   32|         VALUE(u) = 0                   LINE TO CLOSE
+   33| 
+   34| PLOTS
+   35|     CONTOUR(u)
+   36| END
+STUDENT VERSION SETS GROW2=0.35 GRIDARC=30
+IMPORTMESH(/home/ghost/Desktop/itmo/2nd/Physics/pr9/pde/main_output/main_initialmesh.xfr) 
+Trap=0 NDIM=2 NB=10 NAB=3 NODES=108 CELLS=178 SIDES=285 LEGS=0 imaging=0 time(0)=0
+MESH IMPORT ABORTED: Different GRID2D
+Transferred mesh does not match local domain!
+(Boundary descriptions must match exactly.)
+ABORT IMPORT, CHECK_AUTOMESH_HEADER FAILED
+
+==========================
+ SUMMARIZE PARAMETERS
+==========================
+ Param   name     Type       Domain               Definition
+-------------------------------------------------------------------------------
+    1     K       Scalar  (GLOBAL)               :  3
+                                                 =>  3
+    2     A       Scalar  (GLOBAL)               :  15
+                                                 =>  15
+    3     B       Scalar  (GLOBAL)               :  1
+                                                 =>  1
+    4     L       Scalar  (GLOBAL)               :  9
+                                                 =>  9
+    5     H       Scalar  (GLOBAL)               :  7
+                                                 =>  7
+    6  LS_Y       Scalar  (GLOBAL)               : B+(( 0.16667*(A*(Y* 6)))/H)
+                                                 =>  1+((Y* 15)/ 7)
+
+
+
+==========================
+SUMMARIZE EQUATIONS
+==========================
+In the following equation definitions
+Derivatives are represented by appending a dot and the differentiated coordinate.
+The operator <V> represents volume integration. 
+<Vb> is weighted by basis function.
+<Vu> is weighted by the upwind modifer. 
+<Vbu> is weighted by both.
+A dotted volume integral (eg, <Vb.x>) represents volume integration weighted by the indicated
+derivative of the basis function.
+'tri3', 'tet20', etc., represents a basis function in the indicated basis.
+The operator <S.c> represents surface integration weighted by the indicated
+direction cosine.
+
+--------------------------------------------------------------------------------------------------
+
+PRIMARY EQUATIONS
+--------------------
+        DEFINES REGION/  DEPENDS                       BASE        CSE
+EQUATION    VAR  BLOCK    ON VAR        FUNCTION  COMPLEXITY COMPLEXITY    MEMORY           DEFINITION
+--------------------------------------------------------------------------------------------------------------
+     1        U                 Generic Equation                                  : (DIV(K*(GRAD(U))))- 0
+                                    LHS Equation         11         11        704 : (DX( 3*(DX(U))))+(DY( 3*(DY(U))))
+                                          Source          1          2        128 : <Vb>( 0)
+                                  Space Galerkin         18         10        640 : -((<Vb.X>( 3*U.X))+(<Vb.Y>( 3*U.Y)))
+                              U   Space Jacobian         18         10        640 : -((<Vb.X>( 3*tri10.X))+(<Vb.Y>( 3*tri10.Y)))
+                                Surface Galerkin          9          9        576 : (<S.X>( 3*U.X))+(<S.Y>( 3*U.Y))
+                              U Surface Jacobian          9          9        576 : (<S.X>( 3*tri10.X))+(<S.Y>( 3*tri10.Y))
+
+
+EQUATION 1 PARAMETER DEPENDENCIES:
+            K
+
+========================================================
+     SUMMARIZE BOUNDARY CONDITIONS
+========================================================
+
+BOUNDARY CONDITION TAGS with associated BC INDEX
+BC SET   1: BC(  U)= val(1)
+            
+BC SET   2: BC(  U)= val(2)
+            
+BC SET   3: BC(  U)= val(3)
+            
+BC SET   4: BC(  U)= val(4)
+            
+
+    BC  KIND   DEFINES REGION  DEPENDS     FUNCTION  COMPLEXITY    MEMORY    DEFINITION
+-----------------------------------------------------------------------------------------------------
+     1   VAL        U       1         Surf Galerkin          5        320 : U-(X* 0.11111)
+                                  U   Surf Jacobian          1         64 : tri10
+     2   VAL        U       1         Surf Galerkin          9        576 : U-( 1+((Y* 15)/ 7))
+                                  U   Surf Jacobian          1         64 : tri10
+     3   VAL        U       1         Surf Galerkin          5        320 : U-(X* 1.66667)
+                                  U   Surf Jacobian          1         64 : tri10
+     4   VAL        U       1         Surf Galerkin          1         64 : U
+                                  U   Surf Jacobian          1         64 : tri10
+
+===============================
+  SUMMARIZE PLOTS
+===============================
+                      REGION/       BASE        CSE
+  PLOT    TYPE     COMPARTMENT  COMPLEXITY  COMPLEXITY    MEMORY    DEFINITION
+------------------------------------------------------------------------------
+     1     CONTOUR          0          1          1           64 : U
+
+
+=== 0 STORED COMMON SUBEXPRESSIONS === 
+
+
+==UNUSED== PARAMETER DEFINITIONS:
+
+LOG Threads=4 Order=3 Speed=1 Stability=0
+CG it=17 itlimit=2029 Flag=Ok Xnorm=10.1602
+Linear Step 1 Error= 10.16019::2e-06 Orthomin/ILU
+CG it=20 itlimit=2029 Flag=Ok Xnorm=2.78438e-09
+Linear Step 2 Error= 2.784e-9::2e-06 Orthomin/ILU
+RMS Spatial Errors   5.369e-4
+
+================================================================
+===  FlexPDE Version 8.01/L64  09:45:30 Mar  6 2025  Copyright (c) 1996-2023 PDE Solutions Inc.
+===  /home/ghost/Desktop/itmo/2nd/Physics/pr9/pde/main.pde 12:09:39 4/21/26
+================================================================
+    1| TITLE '9-10'
+    2| 
+    3| VARIABLES
+    4|     u
+    5| 
+    6| DEFINITIONS
+    7|     k = 3
+    8|     A = 15
+    9|     B = 1
+   10|     L = 9
+   11|     H = 7
+   12|     
+   13|     ls_y = B + (A/6.0) * (y * (6/H))
+   14| 
+   15| EQUATIONS
+   16|     div(k*grad(u)) = 0 
+   17| 
+   18| BOUNDARIES
+   19|     REGION 1
+   20|         START(0,0)
+   21| 
+   22|         {Bottom edge}
+   23|         VALUE(u) = (x/L)*B             LINE TO (L,0)
+   24| 
+   25|         {Right edge}
+   26|         VALUE(u) = ls_y                LINE TO (L,H)
+   27| 
+   28|         {Top edge}
+   29|         VALUE(u) = (x/L)*A             LINE TO (0,H)
+   30| 
+   31|         {Left edge}
+   32|         VALUE(u) = 0                   LINE TO CLOSE
+   33| 
+   34| PLOTS
+   35|     CONTOUR(u)
+   36| END
+STUDENT VERSION SETS GROW2=0.35 GRIDARC=30
+IMPORTMESH(/home/ghost/Desktop/itmo/2nd/Physics/pr9/pde/main_output/main_initialmesh.xfr) 
+Trap=0 NDIM=2 NB=10 NAB=3 NODES=108 CELLS=178 SIDES=285 LEGS=0 imaging=0 time(0)=0
+MESH IMPORT ABORTED: Different GRID2D
+Transferred mesh does not match local domain!
+(Boundary descriptions must match exactly.)
+ABORT IMPORT, CHECK_AUTOMESH_HEADER FAILED
+
+==========================
+ SUMMARIZE PARAMETERS
+==========================
+ Param   name     Type       Domain               Definition
+-------------------------------------------------------------------------------
+    1     K       Scalar  (GLOBAL)               :  3
+                                                 =>  3
+    2     A       Scalar  (GLOBAL)               :  15
+                                                 =>  15
+    3     B       Scalar  (GLOBAL)               :  1
+                                                 =>  1
+    4     L       Scalar  (GLOBAL)               :  9
+                                                 =>  9
+    5     H       Scalar  (GLOBAL)               :  7
+                                                 =>  7
+    6  LS_Y       Scalar  (GLOBAL)               : B+(( 0.16667*(A*(Y* 6)))/H)
+                                                 =>  1+((Y* 15)/ 7)
+
+
+
+==========================
+SUMMARIZE EQUATIONS
+==========================
+In the following equation definitions
+Derivatives are represented by appending a dot and the differentiated coordinate.
+The operator <V> represents volume integration. 
+<Vb> is weighted by basis function.
+<Vu> is weighted by the upwind modifer. 
+<Vbu> is weighted by both.
+A dotted volume integral (eg, <Vb.x>) represents volume integration weighted by the indicated
+derivative of the basis function.
+'tri3', 'tet20', etc., represents a basis function in the indicated basis.
+The operator <S.c> represents surface integration weighted by the indicated
+direction cosine.
+
+--------------------------------------------------------------------------------------------------
+
+PRIMARY EQUATIONS
+--------------------
+        DEFINES REGION/  DEPENDS                       BASE        CSE
+EQUATION    VAR  BLOCK    ON VAR        FUNCTION  COMPLEXITY COMPLEXITY    MEMORY           DEFINITION
+--------------------------------------------------------------------------------------------------------------
+     1        U                 Generic Equation                                  : (DIV(K*(GRAD(U))))- 0
+                                    LHS Equation         11         11        704 : (DX( 3*(DX(U))))+(DY( 3*(DY(U))))
+                                          Source          1          2        128 : <Vb>( 0)
+                                  Space Galerkin         18         10        640 : -((<Vb.X>( 3*U.X))+(<Vb.Y>( 3*U.Y)))
+                              U   Space Jacobian         18         10        640 : -((<Vb.X>( 3*tri10.X))+(<Vb.Y>( 3*tri10.Y)))
+                                Surface Galerkin          9          9        576 : (<S.X>( 3*U.X))+(<S.Y>( 3*U.Y))
+                              U Surface Jacobian          9          9        576 : (<S.X>( 3*tri10.X))+(<S.Y>( 3*tri10.Y))
+
+
+EQUATION 1 PARAMETER DEPENDENCIES:
+            K
+
+========================================================
+     SUMMARIZE BOUNDARY CONDITIONS
+========================================================
+
+BOUNDARY CONDITION TAGS with associated BC INDEX
+BC SET   1: BC(  U)= val(1)
+            
+BC SET   2: BC(  U)= val(2)
+            
+BC SET   3: BC(  U)= val(3)
+            
+BC SET   4: BC(  U)= val(4)
+            
+
+    BC  KIND   DEFINES REGION  DEPENDS     FUNCTION  COMPLEXITY    MEMORY    DEFINITION
+-----------------------------------------------------------------------------------------------------
+     1   VAL        U       1         Surf Galerkin          5        320 : U-(X* 0.11111)
+                                  U   Surf Jacobian          1         64 : tri10
+     2   VAL        U       1         Surf Galerkin          9        576 : U-( 1+((Y* 15)/ 7))
+                                  U   Surf Jacobian          1         64 : tri10
+     3   VAL        U       1         Surf Galerkin          5        320 : U-(X* 1.66667)
+                                  U   Surf Jacobian          1         64 : tri10
+     4   VAL        U       1         Surf Galerkin          1         64 : U
+                                  U   Surf Jacobian          1         64 : tri10
+
+===============================
+  SUMMARIZE PLOTS
+===============================
+                      REGION/       BASE        CSE
+  PLOT    TYPE     COMPARTMENT  COMPLEXITY  COMPLEXITY    MEMORY    DEFINITION
+------------------------------------------------------------------------------
+     1     CONTOUR          0          1          1           64 : U
+
+
+=== 0 STORED COMMON SUBEXPRESSIONS === 
+
+
+==UNUSED== PARAMETER DEFINITIONS:
+
+LOG Threads=4 Order=3 Speed=1 Stability=0
+CG it=17 itlimit=2029 Flag=Ok Xnorm=10.1602
+Linear Step 1 Error= 10.16019::2e-06 Orthomin/ILU
+CG it=20 itlimit=2029 Flag=Ok Xnorm=2.78438e-09
+Linear Step 2 Error= 2.784e-9::2e-06 Orthomin/ILU
+RMS Spatial Errors   5.369e-4
+END main 17:22:48 4/21/26

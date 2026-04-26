@@ -41,10 +41,6 @@ over_leq_check:
     exit ;
 
 
-overflow_exit:
-    @p error_value
-    exit ;
-
 
 mul_T_S:
     a!                       \ A <- T
@@ -61,6 +57,19 @@ mul_loop:
 
     a
     ;
+
+
+fn_check_overflow:
+    1 eam
+    0 0 + \ Carry -> 
+    -if overflow_exit
+    0 eam
+    ;
+
+
+overflow_exit:
+    @p error_value
+    exit ;
 
 
 exit:

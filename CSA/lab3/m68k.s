@@ -102,7 +102,7 @@ main:
     beq m_loop_exit
 
     ; ch = line[i]
-    ; if ch != p_ch || cnt == 9 || next_ch == '\0':
+    ; if ch != p_ch || cnt == 9:
     ;     if print_cnt == 40:
     ;         exit(0xCCCCCC)
     ;     else:
@@ -115,8 +115,8 @@ main:
     cmp.l 9, D1
     beq m_new_char
     add.l 1, D1
-    cmp.l 0, 4(A6, D7)
-    beq m_new_char
+    ; cmp.l 0, 4(A6, D7)
+    ; beq m_new_char
     jmp m_old_char
 
     m_new_char:
@@ -125,7 +125,7 @@ main:
     move.l 1, D1
     move.l D3, D0
     add.l 8, D2
-    cmp.l 328, D2
+    cmp.l 320, D2
     bne m_r_not_over
     ; TODO: impl
     m_r_not_over:
@@ -135,7 +135,9 @@ main:
     add.l 4, D7
     jmp m_loop
     m_loop_exit:
-
+    move.l D1, -328(A6, D2)
+    move.l D0, -324(A6, D2)
+    add.l 8, D2
 
     movea.l output_addr, A5
     movea.l (A5), A5

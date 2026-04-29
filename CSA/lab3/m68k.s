@@ -57,7 +57,7 @@ output_addr:     .word  0x84               ; Output address where the result sho
 input_limit: .word 0x40
 input_terminator: .byte '\n', 0, 0, 0
 
-stack_top: .word 0x1000
+stack_top: .word 0x800
 
     .text
 .org             0x100
@@ -79,24 +79,31 @@ _start:
 ; D1 - Prev char counter
 ; D2 - Result size
 main:
-    link A6, -400 ; 300 bytes for some variables
+    link A6, -800 ; 300 bytes for some variables
     ; some code with variables
     ; link A5, -168 ; struct ReadedString
-    move.l -168, D7
+    move.l -264, D7
     jsr read_input
 
-    ; if (line is empty) {exit()}
-    bne m_line_is_ok
-    ; TODO: impl 0xCCCCCCCC
-    m_line_is_ok:
 
-    move.l -168(A6), D0
     move.l 1, D1
     move.l 0, D2
+    move.l -264(A6), D0
+
+    ; if (line is empty) {exit()}
+    beq m_exit
+
+    cmp.b 0, -4(A6)
+    bne m_aaa
+    movea.l output_addr, A5
+    movea.l (A5), A5
+    move.l 0xCCCCCCCC, (A5)
+    halt 
+    m_aaa:
 
     ; D7 - Line iter
     ; D3 - Current char
-    move.l -164, D7
+    move.l -260, D7
     m_loop:
     move.l 0(A6, D7), D3
     beq m_loop_exit
@@ -120,24 +127,27 @@ main:
     jmp m_old_char
 
     m_new_char:
-    move.l D1, -328(A6, D2)
-    move.l D0, -324(A6, D2)
+    move.l D1, -520(A6, D2)
+    move.l D0, -516(A6, D2)
     move.l 1, D1
     move.l D3, D0
     add.l 8, D2
-    cmp.l 320, D2
+    cmp.l 248, D2
     bne m_r_not_over
-    ; TODO: impl
+    movea.l output_addr, A5
+    movea.l (A5), A5
+    move.l 0xCCCCCCCC, (A5)
+    halt 
     m_r_not_over:
-    
     m_old_char:
     
     add.l 4, D7
     jmp m_loop
     m_loop_exit:
-    move.l D1, -328(A6, D2)
-    move.l D0, -324(A6, D2)
+    move.l D1, -520(A6, D2)
+    move.l D0, -516(A6, D2)
     add.l 8, D2
+
 
     movea.l output_addr, A5
     movea.l (A5), A5
@@ -147,15 +157,21 @@ main:
     cmp.l D2, D3
     beq m_print_loop_exit
 
-    move.l -328(A6, D3), D0
+    move.l -520(A6, D3), D0
     add.l '0', D0
     move.l D0, (A5)
-    move.l -324(A6, D3), (A5)
+    move.l -516(A6, D3), (A5)
     
     add.l 8, D3
     jmp m_print_loop
     m_print_loop_exit:
 
+    m_exit:
+
+    cmp.b 0, -4(A6)
+    bne no_rest
+    jsr print_rest
+    no_rest:
     
     ; ... some code with ReadedString and variables
     ; unlk A5 ; drop ReadedString
@@ -165,9 +181,9 @@ main:
 
 
 
-; struct ReadedString (42 words = 168 bytes)
-;     - <0>   word str[41] - 40-words null-terminated string
-;     - <164> word is_eof
+; struct ReadedString (66 words = 264 bytes)
+;     - <0>   word str[65] - 0x40-words null-terminated string
+;     - <260> word is_eof
 
 ; read_value(out<A6 + D7>: &ReadedString)
 ; A6 - foreign stack
@@ -187,6 +203,7 @@ read_input:
 
     movea.l input_limit, A0
     move.l (A0), D5
+    move.l 256, D5
     add.l D7, D5
     
     move.l D7, D4
@@ -216,6 +233,32 @@ read_input:
 
     ri_loop_exit:
         move.l 0, 0(A6, D4) ; null-terminator
-        move.l D3, 164(A6, D7)
+        move.l D3, 260(A6, D7)
+
+    rts
+
+
+print_rest:
+    movea.l input_addr, A1
+    movea.l (A1), A1
+
+    movea.l output_addr, A2
+    movea.l (A2), A2
+
+    movea.l input_terminator, A0
+    move.l (A0), D6
+
+    pr_loop:
+        move.l (A1), D0
+    
+        ; if (ch == '\n') break;
+        cmp.b D6, D0
+        beq pr_loop_exit
+
+        move.l D0, (A2)
+    
+        jmp pr_loop
+
+    pr_loop_exit:
 
     rts

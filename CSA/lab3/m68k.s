@@ -51,27 +51,31 @@
 
     .data
 
-input_addr:      .word  0x80               ; Input address where the number 'n' is stored
-output_addr:     .word  0x84               ; Output address where the result should be stored
+input_addr:       .word  0x80               ; Input address where the number 'n' is stored
+output_addr:      .word  0x84               ; Output address where the result should be stored
 
-input_limit: .word 0x40
-input_terminator: .byte '\n', 0, 0, 0
+input_limit:      .word 256
+input_terminator: .word '\n',
 
-stack_top: .word 0x800
+overflow_err:     .word 0xCCCCCCCC
+
+stack_top: .word 0x1000
+
+; struct ReadedString (66 words = 264 bytes)
+;     - <0>   word str[65] - 0x40-words null-terminated string
+;     - <260> word is_eof
+sizeof_ReadedString:    .word 264
+
 
     .text
 .org             0x100
 
-; A5 - input_addr
-; A6 - output_addr
-; D7 - input_terminator
 
 _start:
     movea.l stack_top, A7
     movea.l (A7), A7
     jsr main
-
-
+    
     halt
 
 ; A6 - Stack
@@ -79,10 +83,15 @@ _start:
 ; D1 - Prev char counter
 ; D2 - Result size
 main:
-    link A6, -800 ; 300 bytes for some variables
-    ; some code with variables
-    ; link A5, -168 ; struct ReadedString
-    move.l -264, D7
+    ; 0..263   - ReadedString
+    ; 264..519 - word out_buff[64] (256 bytes)
+    link A6, -520
+
+    ; Ну это бред такое писать... 4 инструкции вместо одной
+    movea.l sizeof_ReadedString, A0
+    move.l (A0), D0
+    neg.l D0
+    move.l D0, D7                        
     jsr read_input
 
 
@@ -93,97 +102,90 @@ main:
     ; if (line is empty) {exit()}
     beq m_exit
 
+    ; if (ReadedString.is_eof) {exit_overflow();}
     cmp.b 0, -4(A6)
-    bne m_aaa
-    movea.l output_addr, A5
-    movea.l (A5), A5
-    move.l 0xCCCCCCCC, (A5)
-    halt 
-    m_aaa:
-
-    ; D7 - Line iter
+    beq overflow_exit
+     
+    ; D7 - Line iter, started from i=1
     ; D3 - Current char
+    ; Main compression algorithm
     move.l -260, D7
     m_loop:
+    ; while ch != 0
     move.l 0(A6, D7), D3
     beq m_loop_exit
 
     ; ch = line[i]
     ; if ch != p_ch || cnt == 9:
-    ;     if print_cnt == 40:
+    ;     if print_cnt == 62:
     ;         exit(0xCCCCCC)
     ;     else:
     ;         print(cht .. ch)
     ; else:
     ;     cnt += 1
-
+    
     cmp.l D3, D0
     bne m_new_char
-    cmp.l 9, D1
+    cmp.b 9, D1
     beq m_new_char
-    add.l 1, D1
-    ; cmp.l 0, 4(A6, D7)
-    ; beq m_new_char
-    jmp m_old_char
+    add.b 1, D1
+    jmp m_new_char_over
 
     m_new_char:
+    ; Store pair
     move.l D1, -520(A6, D2)
     move.l D0, -516(A6, D2)
+    ; Update prev_char and counter
     move.l 1, D1
     move.l D3, D0
+    ; Shift and check output buffer
     add.l 8, D2
-    cmp.l 248, D2
-    bne m_r_not_over
-    movea.l output_addr, A5
-    movea.l (A5), A5
-    move.l 0xCCCCCCCC, (A5)
-    halt 
-    m_r_not_over:
-    m_old_char:
+    cmp.l 248, D2 ; reserve 8 bytes to end
+    beq overflow_exit
+    m_new_char_over:
     
     add.l 4, D7
     jmp m_loop
     m_loop_exit:
+
+    ; Add last pair
     move.l D1, -520(A6, D2)
     move.l D0, -516(A6, D2)
     add.l 8, D2
 
-
+    ; Print pairs
     movea.l output_addr, A5
     movea.l (A5), A5
 
-    move.l 0, D3
+    ; Output buffer iter
+    move.l 0, D3  
     m_print_loop:
+    ; while iter != buf_len
     cmp.l D2, D3
     beq m_print_loop_exit
 
     move.l -520(A6, D3), D0
-    add.l '0', D0
+    add.b '0', D0
     move.l D0, (A5)
     move.l -516(A6, D3), (A5)
-    
-    add.l 8, D3
+
+    add.l 8, D3 ; Shift iter
     jmp m_print_loop
     m_print_loop_exit:
 
     m_exit:
 
-    cmp.b 0, -4(A6)
-    bne no_rest
-    jsr print_rest
-    no_rest:
-    
-    ; ... some code with ReadedString and variables
-    ; unlk A5 ; drop ReadedString
-    ; some code with variables
     unlk A6
     rts
 
 
+overflow_exit:
+    movea.l output_addr, A5
+    movea.l (A5), A5
+    movea.l overflow_err, A0
+    move.l (A0), (A5)
+    halt
 
-; struct ReadedString (66 words = 264 bytes)
-;     - <0>   word str[65] - 0x40-words null-terminated string
-;     - <260> word is_eof
 
 ; read_value(out<A6 + D7>: &ReadedString)
 ; A6 - foreign stack
@@ -203,7 +205,6 @@ read_input:
 
     movea.l input_limit, A0
     move.l (A0), D5
-    move.l 256, D5
     add.l D7, D5
     
     move.l D7, D4
@@ -233,32 +234,6 @@ read_input:
 
     ri_loop_exit:
         move.l 0, 0(A6, D4) ; null-terminator
-        move.l D3, 260(A6, D7)
-
-    rts
-
-
-print_rest:
-    movea.l input_addr, A1
-    movea.l (A1), A1
-
-    movea.l output_addr, A2
-    movea.l (A2), A2
-
-    movea.l input_terminator, A0
-    move.l (A0), D6
-
-    pr_loop:
-        move.l (A1), D0
-    
-        ; if (ch == '\n') break;
-        cmp.b D6, D0
-        beq pr_loop_exit
-
-        move.l D0, (A2)
-    
-        jmp pr_loop
-
-    pr_loop_exit:
+        move.l D3, 260(A6, D7) ; is_eof flag
 
     rts

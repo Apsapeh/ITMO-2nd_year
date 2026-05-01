@@ -1,20 +1,26 @@
-name: m68k
+name: not true
 limit: 1000
 memory_size: 0x1000
 memory_mapped_io:
-  0x80: [1]
+  0x80: ['A', 10]
   0x84: []
 reports:
   - name: Step-by-step
     slice: all
     view: |
       {pc}:	{instruction}	{pc:label}
-      {A0} {A1} {D0} {D1}
+      A: {A0} | {A1} | {A2} | {A3} | {A4} | {A5} | {A6} | {A7}
+      D: {D0} | {D1} | {D2} | {D3} | {D4} | {D5} | {D6} | {D7}
+      S: {SR:bin}
   - name: Result
     slice: last
     view: |
       numio[0x80]: {io:0x80:dec}
       numio[0x84]: {io:0x84:dec}
+      symio[0x80]: {io:0x80:sym}
+      symio[0x84]: {io:0x84:sym}
     assert: |
       numio[0x80]: [] >>> []
-      numio[0x84]: [] >>> [0]
+      numio[0x84]: [] >>> [49,65]
+      symio[0x80]: "" >>> ""
+      symio[0x84]: "" >>> "1A"

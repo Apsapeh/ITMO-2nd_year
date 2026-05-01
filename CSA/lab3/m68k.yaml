@@ -2,16 +2,18 @@ name: not true
 limit: 1000
 memory_size: 0x1000
 memory_mapped_io:
-  0x80: ['A', 10]
+  0x80: ['A', 'A', 'B', 'B', 10]
   0x84: []
 reports:
   - name: Step-by-step
     slice: all
     view: |
+
       A: {A0} | {A1} | {A2} | {A3} | {A4} | {A5} | {A6} | {A7}
       D: {D0} | {D1} | {D2} | {D3} | {D4} | {D5} | {D6} | {D7}
       S: {SR:bin}
-      Stack_in_buff: {memory:4023:4087}
+      in_buff: {memory:4023:4087}
+      out_buff: {memory:3959:4022}
       {pc}:	{instruction}	{pc:label}
   - name: Result
     slice: last
@@ -22,6 +24,6 @@ reports:
       symio[0x84]: {io:0x84:sym}
     assert: |
       numio[0x80]: [] >>> []
-      numio[0x84]: [] >>> [49,65]
+      numio[0x84]: [] >>> [50,65,50,66]
       symio[0x80]: "" >>> ""
-      symio[0x84]: "" >>> "1A"
+      symio[0x84]: "" >>> "2A2B"

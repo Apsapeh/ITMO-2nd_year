@@ -8,10 +8,11 @@ reports:
   - name: Step-by-step
     slice: all
     view: |
-      {pc}:	{instruction}	{pc:label}
       A: {A0} | {A1} | {A2} | {A3} | {A4} | {A5} | {A6} | {A7}
       D: {D0} | {D1} | {D2} | {D3} | {D4} | {D5} | {D6} | {D7}
       S: {SR:bin}
+      Stack_in_buff: {memory:4023:4087}
+      {pc}:	{instruction}	{pc:label}
   - name: Result
     slice: last
     view: |

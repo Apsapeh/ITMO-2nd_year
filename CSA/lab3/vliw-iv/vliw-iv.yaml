@@ -1,0 +1,22 @@
+limit: 1000
+memory_size: 0x1000
+memory_mapped_io:
+  0x80: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  0x84: []
+reports:
+  - name: step-by-step
+    slice: all
+    view: |
+
+      S: {S1} | {S2} | {S3} | {S4}
+      T: {T0} | {T1} | {T2} | {T3} | {T4} | {T5}
+      {pc}:	{instruction}	{pc:label}
+
+  - name: result
+    slice: last
+    view: |
+      numio[0x80]: {io:0x80:dec}
+      numio[0x84]: {io:0x84:dec}
+    assert: |
+      numio[0x80]: [] >>> []
+      numio[0x84]: [] >>> [0]

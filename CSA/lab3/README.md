@@ -5,4 +5,4 @@
 | M68K          | 8/8   | 07.05.2026 | [Report](https://wrench.edu.swampbuds.me/report/7d942fa8-124b-4997-8a99-367ebed4dd97) |
 | RISC-IV       | 8/8   | 07.05.2026 | [Report](https://wrench.edu.swampbuds.me/report/678f0f21-94f1-40c4-a7fc-d62d3cf44800) |
 | Scheme (F32A) | 7/8   | 04.06.2026 | ...                                                                                   |
-| VLIW-IV       | ?/?   | ??.06.2026 | [Report](https://wrench.edu.swampbuds.me/report/a93207db-29ae-48b7-995c-883c81095d29) |
+| VLIW-IV       | 8/8   | 09.06.2026 | [Report](https://wrench.edu.swampbuds.me/report/a93207db-29ae-48b7-995c-883c81095d29) |
